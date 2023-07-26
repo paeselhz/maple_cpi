@@ -1,0 +1,83 @@
+/*navbar*/
+
+.navbar {
+  background-color: transparent;
+  -webkit-transition: padding .3s;
+  -moz-transition: padding .3s;
+  transition: padding .3s;
+  border: none;
+}
+
+/*.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}*/
+
+/*button styling*/
+
+.btn-group-justified>.btn, .btn-group-justified>.btn-group {
+  padding: 1%;
+}
+
+/*cards info*/
+
+.card-info {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: table;
+  width: 250px;
+  height: 130px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  border-radius: 7px;
+  overflow: hidden;
+  transition: box-shadow .4s;
+}
+
+.card-info span.name {
+  position: absolute;
+  left: 0;
+  font-size: 1em;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.2em;
+  letter-spacing: 1px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  word-break: normal;
+  color: #fff;
+  transition: font-weight .4s;
+}
+
+.card-info span.value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4em;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.2em;
+  letter-spacing: 1px;
+  word-break: normal;
+  color: rgba(0, 0, 0, 0.5);
+  transition: font-weight .4s;
+}
+
+.card-info span.region {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 1em;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.2em;
+  letter-spacing: 1px;
+  word-break: normal;
+  color: #fff;
+  transition: font-weight .4s;
+}
