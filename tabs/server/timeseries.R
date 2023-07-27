@@ -298,7 +298,7 @@ output$render_highcharts <-
                 ref_date >= date_range[1],
                 ref_date <= date_range[2]
               ) %>% 
-              highchart_cpi_yoy_mom()
+              highchart_cpi_yoy_mom(ema = 12)
           )
         )
         

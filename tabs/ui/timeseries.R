@@ -4,7 +4,7 @@ timeseries <-
     value = "timeseries",
     fluidRow(
       column(
-        width = 6,
+        width = 4,
         radioGroupButtons(
           inputId = "timeseries_manual_range",
           label = "Time frame",
@@ -20,12 +20,39 @@ timeseries <-
         )
       ),
       column(
-        width = 6,
+        width = 4,
         airDatepickerInput(
           inputId = "timeseries_date_range",
           label = "Select a date range",
           range = TRUE,
           value = c(min(cpi$ref_date), max(cpi$ref_date)) + 1
+        )
+      ),
+      column(
+        width = 4,
+        fluidRow(
+          column(
+            width = 6,
+            shinyWidgets::awesomeCheckbox(
+              inputId = "checkbox_ema",
+              label = "Visualize Exponential Moving Average (EMA)",
+              value = FALSE
+            )
+          ),
+          column(
+            width = 6,
+            conditionalPanel(
+              "input.checkbox_ema",
+              shinyWidgets::numericInputIcon(
+                inputId = "ema_window",
+                label = "Time window for EMA",
+                min = 3,
+                max = 18,
+                step = 1,
+                value = 12
+              )
+            )
+          )
         )
       )
     ),

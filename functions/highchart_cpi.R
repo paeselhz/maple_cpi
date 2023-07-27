@@ -1,14 +1,15 @@
 
 highchart_cpi_yoy_mom <-
-  function(df, selected_geography = "Canada", selected_group = "All-items") {
+  function(df, selected_geography = "Canada", selected_group = "All-items", ema = 0) {
     
     cpi_calculated <-
-      calculate_mom_yoy(df, selected_geography, selected_group) %>% 
+      calculate_mom_yoy(df, selected_geography, selected_group, ema_window = ema) %>% 
       filter(
         !is.na(yoy)
       )
     
-    cpi_calculated %>% 
+    hc_return <-
+      cpi_calculated %>% 
       hchart(
         "line",
         hcaes(x = ref_date, y = yoy),
@@ -40,5 +41,21 @@ highchart_cpi_yoy_mom <-
           "Geographical location: ", selected_geography
         )
       )
+    
+    if(ema) {
+      
+      hc_return %>% 
+        hc_add_series(
+          data = cpi_calculated,
+          type = "line",
+          hcaes(x = ref_date, y = ema),
+          name = "YoY% Exp. Moving Average"
+        )
+      
+    } else {
+      
+      hc_return
+      
+    }
     
   }
