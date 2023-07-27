@@ -1,24 +1,31 @@
 
+max_cpi_date <-
+  ymd(max(cpi$ref_date))
+
+min_cpi_date <-
+  ymd(min(cpi$ref_date))
+
 observeEvent(input$group_analysis_manual_range, {
   
   manual_range_selected <-
     input$group_analysis_manual_range
   
-  max_cpi_date <-
-    max(cpi$ref_date)
-  
   if(manual_range_selected == - 1) {
     
     date_ranges <-
       c(
-        min(cpi$ref_date),
-        max(cpi$ref_date)
-      )
+        min_cpi_date,
+        max_cpi_date
+      ) + 1
     
   } else {
     
     date_ranges <-
-      c(ymd(max_cpi_date) - years(manual_range_selected), max_cpi_date)
+      c(max_cpi_date - years(manual_range_selected), max_cpi_date)
+    
+    # XGH to solve the issue between date in function and AirDatePickerInput
+    date_ranges <-
+      date_ranges + 1
     
   }
   
@@ -35,9 +42,6 @@ observeEvent(input$group_analysis_date_range, {
   date_range <-
     input$group_analysis_date_range
   
-  max_cpi_date <-
-    max(cpi$ref_date)
-  
   if(length(date_range) == 2) {
     
     if(date_range[2] != max_cpi_date) {
@@ -49,10 +53,10 @@ observeEvent(input$group_analysis_date_range, {
       )
       
     } else if (!date_range[1] %in% c(
-      ymd(max_cpi_date) - years(1),
-      ymd(max_cpi_date) - years(2),
-      ymd(max_cpi_date) - years(3),
-      ymd(max_cpi_date) - years(5)
+      max_cpi_date - years(1),
+      max_cpi_date - years(2),
+      max_cpi_date - years(3),
+      max_cpi_date - years(5)
     )) {
       
       updateRadioGroupButtons(
@@ -70,10 +74,14 @@ observeEvent(input$group_analysis_date_range, {
 output$cpi_yoy_groups <-
   renderHighchart({
     
+    date_range <-
+      input$group_analysis_date_range
+    
     calculate_mom_yoy(cpi, "Canada", major_groups[2:9]) %>% 
       filter(
         !is.na(yoy),
-        ref_date >= "2018-01-01"
+        ref_date >= date_range[1],
+        ref_date <= date_range[2]
       ) %>% 
       full_join(
         basket_weights %>% 
@@ -116,10 +124,14 @@ output$cpi_yoy_groups <-
 output$cpi_mom_groups <-
   renderHighchart({
     
+    date_range <-
+      input$group_analysis_date_range
+    
     calculate_mom_yoy(cpi, "Canada", major_groups[2:9]) %>% 
       filter(
         !is.na(yoy),
-        ref_date >= "2018-01-01"
+        ref_date >= date_range[1],
+        ref_date <= date_range[2]
       ) %>% 
       full_join(
         basket_weights %>% 

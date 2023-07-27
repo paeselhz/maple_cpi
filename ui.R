@@ -1,7 +1,7 @@
 shinyUI(
   fluidPage(
     navbarPage(
-      title = "Canadian CPI",
+      title = "Maple CPI",
       theme = "styles.css",
       selected = "home",
       fluid = T,

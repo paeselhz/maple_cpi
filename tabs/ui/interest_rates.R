@@ -9,6 +9,7 @@ interest_rates <-
           inputId = "interest_rates_manual_range",
           label = "Time frame",
           choices = c("All" = -1, "1 Year" = 1, "2 Years" = 2, "3 Years" = 3, "5 Years" = 5),
+          selected = 5,
           individual = TRUE,
           justified = TRUE,
           checkIcon = list(
@@ -25,7 +26,7 @@ interest_rates <-
           inputId = "interest_rates_date_range",
           label = "Select a date range",
           range = TRUE,
-          value = c(min(boc_rates$date), max(boc_rates$date))
+          value = c(ymd(max(boc_rates$date) - years(5)), max(boc_rates$date)) + 1
         )
       )
     ),

@@ -1,24 +1,27 @@
 
+max_boc_date <-
+  ymd(max(boc_rates$date))
+
+min_boc_date <-
+  ymd(min(boc_rates$date))
+
 observeEvent(input$interest_rates_manual_range, {
   
   manual_range_selected <-
     input$interest_rates_manual_range
   
-  max_boc_date <-
-    max(boc_rates$date)
-  
   if(manual_range_selected == - 1) {
     
     date_ranges <-
       c(
-        min(boc_rates$date),
-        max(boc_rates$date)
-      )
+        min_boc_date,
+        max_boc_date
+      ) + 1
     
   } else {
     
     date_ranges <-
-      c(ymd(max_boc_date) - years(manual_range_selected), max_boc_date)
+      c(max_boc_date - years(manual_range_selected), max_boc_date) + 1
     
   }
   
@@ -35,9 +38,6 @@ observeEvent(input$interest_rates_date_range, {
   date_range <-
     input$interest_rates_date_range
   
-  max_boc_date <-
-    max(boc_rates$date)
-  
   if(length(date_range) == 2) {
     
     if(date_range[2] != max_boc_date) {
@@ -49,10 +49,10 @@ observeEvent(input$interest_rates_date_range, {
       )
       
     } else if (!date_range[1] %in% c(
-      ymd(max_boc_date) - years(1),
-      ymd(max_boc_date) - years(2),
-      ymd(max_boc_date) - years(3),
-      ymd(max_boc_date) - years(5)
+      max_boc_date - years(1),
+      max_boc_date - years(2),
+      max_boc_date - years(3),
+      max_boc_date - years(5)
     )) {
       
       updateRadioGroupButtons(
