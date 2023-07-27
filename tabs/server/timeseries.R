@@ -71,6 +71,45 @@ observeEvent(input$timeseries_date_range, {
   
 })
 
+click_province <- 
+  eventReactive(
+    input$select_province_map_click, 
+    {
+      
+      if(is.null(input$select_province_map_shape_click)) {
+        
+        return("Canada")
+        
+      } else {
+        
+        if(input$select_province_map_click$lat != input$select_province_map_shape_click$lat) {
+          
+          return("Canada")
+          
+        } else {
+         
+          shape_click_info <- input$select_province_map_shape_click
+          
+          shape_click_id <- shape_click_info$id
+          
+          return(shape_click_id)
+           
+        }
+         
+      }
+      
+    })
+
+observe({
+  
+  updatePickerInput(
+    session = session, 
+    inputId = 'selected_geography', 
+    selected = click_province()
+  )
+  
+})
+
 output$render_cards <-
   renderUI({
     
@@ -320,8 +359,35 @@ output$render_highcharts <-
 output$select_province_map <-
   renderLeaflet({
     
-    leaflet()  %>% 
-      addTiles() %>% 
-      addPolygons(data = map_provinces, weight = 5, col = 'red')
+    selected_geography <-
+      input$selected_geography
+    
+    if(selected_geography == "Canada") {
+      
+      leaflet()  %>% 
+        addTiles() %>% 
+        addPolygons(data = map_provinces, weight = 5, col = 'red', layerId = ~PRENAME)
+      
+    } else {
+      
+      prov_map_bounds <-
+        map_provinces %>% 
+        filter(
+          PRENAME == selected_geography
+        ) %>% 
+        sf::st_bbox() %>% 
+        unname()
+      
+      leaflet()  %>% 
+        addTiles() %>% 
+        addPolygons(data = map_provinces, weight = 5, col = 'red', layerId = ~PRENAME) %>% 
+        fitBounds(lng1 = prov_map_bounds[1], 
+                  lat1 = prov_map_bounds[2], 
+                  lng2 = prov_map_bounds[3], 
+                  lat2 = prov_map_bounds[4])
+      
+    }
+    
+    
     
   })

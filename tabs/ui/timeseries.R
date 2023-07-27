@@ -45,7 +45,8 @@ timeseries <-
         selected = geographical_locations[1],
         multiple = FALSE
       ),
-      leafletOutput("select_province_map")
+      leafletOutput("select_province_map") %>% 
+        withSpinner(type = 4, color = "#e6e6e6")
     ),
     column(
       width = 9,
