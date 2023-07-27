@@ -45,7 +45,7 @@ timeseries <-
         selected = geographical_locations[1],
         multiple = FALSE
       ),
-      p("space for map")
+      leafletOutput("select_province_map")
     ),
     column(
       width = 9,

@@ -1,5 +1,7 @@
+library(sf)
 library(dplyr)
 library(shiny)
+library(leaflet)
 library(lubridate)
 library(highcharter)
 library(shinyWidgets)
@@ -70,6 +72,13 @@ major_groups <-
     "Recreation, education and reading",
     "Alcoholic beverages, tobacco products and recreational cannabis"
   )
+
+map_provinces <-
+  readr::read_rds('data/map_provinces.rds') %>% 
+  filter(
+    PRENAME %in% geographical_locations
+  ) %>% 
+  sf::st_transform(crs = 4702)
 
 purrr::walk(
   list.files('tabs/ui', recursive = T, full.names = T),

@@ -71,7 +71,6 @@ observeEvent(input$timeseries_date_range, {
   
 })
 
-
 output$render_cards <-
   renderUI({
     
@@ -315,5 +314,14 @@ output$render_highcharts <-
       )
       
     }
+    
+  })
+
+output$select_province_map <-
+  renderLeaflet({
+    
+    leaflet()  %>% 
+      addTiles() %>% 
+      addPolygons(data = map_provinces, weight = 5, col = 'red')
     
   })
