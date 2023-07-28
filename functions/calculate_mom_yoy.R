@@ -5,11 +5,11 @@ calculate_mom_yoy <-
     mom_yoy_df <-
       df %>% 
       filter(
-        geo == selected_geography,
+        geo %in% selected_geography,
         products_and_product_groups %in% selected_group
       ) %>% 
       group_by(
-        products_and_product_groups
+        geo, products_and_product_groups
       ) %>% 
       arrange(ref_date) %>% 
       reframe(

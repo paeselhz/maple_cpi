@@ -366,27 +366,17 @@ output$select_province_map <-
       input$selected_geography
     
     cpi_all_items_provinces <-
-      purrr::map_df(
-        .x = geographical_locations[2:11],
-        function(x) {
-          
-          calculate_mom_yoy(cpi, x, "All-items") %>% 
-            filter(
-              !is.na(yoy),
-              ref_date == max(ref_date)
-            ) %>% 
-            mutate(
-              PRENAME = x
-            )
-          
-        }
+      calculate_mom_yoy(cpi, geographical_locations[2:11], "All-items") %>% 
+      filter(
+        !is.na(yoy),
+        ref_date == max(ref_date)
       )
     
     map_provinces_cpi <-
       map_provinces %>% 
       left_join(
         cpi_all_items_provinces,
-        by = "PRENAME"
+        by = c("PRENAME" = "geo")
       )
     
     canada_map <-

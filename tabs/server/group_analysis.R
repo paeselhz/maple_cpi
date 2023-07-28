@@ -170,3 +170,63 @@ output$cpi_mom_groups <-
       )
     
   })
+
+output$cpi_groups <-
+  renderHighchart({
+    
+    date_range <-
+      input$group_analysis_date_range
+    
+    selected_comparison <-
+      input$comparison_yoy_mom
+    
+    calculate_mom_yoy(cpi, "Canada", major_groups[2:9], ema_window = 0) %>% 
+      filter(
+        !is.na(yoy),
+        ref_date >= date_range[1],
+        ref_date <= date_range[2]
+      ) %>% 
+      full_join(
+        basket_weights %>% 
+          filter(geo == "Canada") %>% 
+          select(
+            products_and_product_groups,
+            basket_weights,
+            start_month,
+            end_month
+          ),
+        by = "products_and_product_groups",
+        relationship = "many-to-many"
+      ) %>% 
+      filter(
+        ref_date >= start_month & ref_date <= end_month
+      ) %>% 
+      mutate(
+        contribution = !!sym(selected_comparison)*basket_weights/100
+      ) %>% 
+      hchart(
+        "column",
+        hcaes(x = ref_date, y = contribution, group = "products_and_product_groups"),
+        stacking = "normal"
+      ) %>% 
+      hc_tooltip(
+        valueDecimals = 3
+      ) %>% 
+      hc_xAxis(
+        title = list(text = "Reference Date")
+      ) %>% 
+      hc_yAxis(
+        title = list(text = "CPI")
+      ) %>% 
+      hc_title(
+        text = paste0(
+          "CPI ", 
+          ifelse(selected_comparison == "mom", "MoM", "YoY"), 
+          " % by Major Groups of Products"
+        )
+      ) %>% 
+      hc_exporting(
+        enabled = TRUE
+      )
+    
+  })

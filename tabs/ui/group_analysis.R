@@ -21,25 +21,36 @@ group_analysis <-
         )
       ),
       column(
-        width = 6,
+        width = 3,
         airDatepickerInput(
           inputId = "group_analysis_date_range",
           label = "Select a date range",
           range = TRUE,
           value = c(ymd(max(cpi$ref_date)) - years(5), max(cpi$ref_date)) + 1
         )
+      ),
+      column(
+        width = 3,
+        radioGroupButtons(
+          inputId = "comparison_yoy_mom",
+          label = NULL,
+          choices = c("YoY" = "yoy", "MoM" = "mom"),
+          selected = "yoy",
+          individual = TRUE,
+          justified = TRUE
+        )
       )
     ),
     fluidRow(
       column(
-        width = 6,
-        highchartOutput("cpi_yoy_groups") %>% 
-          withSpinner(type = 4, color = "#e6e6e6")
-      ),
-      column(
-        width = 6,
-        highchartOutput("cpi_mom_groups") %>% 
+        width = 12,
+        highchartOutput("cpi_groups", height = "600px") %>% 
           withSpinner(type = 4, color = "#e6e6e6")
       )
+      # column(
+      #   width = 6,
+      #   highchartOutput("cpi_mom_groups") %>% 
+      #     withSpinner(type = 4, color = "#e6e6e6")
+      # )
     )
   )

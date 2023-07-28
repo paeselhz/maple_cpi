@@ -40,6 +40,9 @@ highchart_cpi_yoy_mom <-
         text = paste0(
           "Geographical location: ", selected_geography
         )
+      ) %>% 
+      hc_exporting(
+        enabled = TRUE
       )
     
     if(ema) {
