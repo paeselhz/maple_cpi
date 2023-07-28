@@ -81,3 +81,8 @@
   color: #fff;
   transition: font-weight .4s;
 }
+
+.card-info:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a box-shadow effect on hover */
+  transform: scale(1.05); /* Increase the size by 5% on hover (adjust the scale value as desired) */
+}

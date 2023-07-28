@@ -48,16 +48,16 @@ basket_weights <-
 geographical_locations <-
   c(
     "Canada",
-    "Newfoundland and Labrador",
-    "Prince Edward Island",
-    "Nova Scotia",
-    "New Brunswick",
-    "Quebec",
-    "Ontario",
-    "Manitoba",
-    "Saskatchewan",
     "Alberta",
-    "British Columbia"
+    "British Columbia",
+    "Manitoba",
+    "New Brunswick",
+    "Newfoundland and Labrador",
+    "Nova Scotia",
+    "Ontario",
+    "Prince Edward Island",
+    "Quebec",
+    "Saskatchewan"
   )
 
 major_groups <-

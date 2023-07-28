@@ -297,11 +297,7 @@ output$render_highcharts <-
           column(
             width = 12,
             cpi %>% 
-              filter(
-                ref_date >= date_range[1],
-                ref_date <= date_range[2]
-              ) %>% 
-              highchart_cpi_yoy_mom(ema = selected_ema_window)
+              highchart_cpi_yoy_mom(date_range = date_range, ema = selected_ema_window)
           )
         )
         
@@ -311,20 +307,12 @@ output$render_highcharts <-
           column(
             width = 6,
             cpi %>% 
-              filter(
-                ref_date >= date_range[1],
-                ref_date <= date_range[2]
-              ) %>% 
-              highchart_cpi_yoy_mom("Canada", "All-items", ema = selected_ema_window)
+              highchart_cpi_yoy_mom(date_range = date_range, "Canada", "All-items", ema = selected_ema_window)
           ),
           column(
             width = 6,
             cpi %>% 
-              filter(
-                ref_date >= date_range[1],
-                ref_date <= date_range[2]
-              ) %>% 
-              highchart_cpi_yoy_mom("Canada", selected_group, ema = selected_ema_window)
+              highchart_cpi_yoy_mom(date_range = date_range, "Canada", selected_group, ema = selected_ema_window)
           )
         )
         
@@ -338,20 +326,12 @@ output$render_highcharts <-
         column(
           width = 6,
           cpi %>% 
-            filter(
-              ref_date >= date_range[1],
-              ref_date <= date_range[2]
-            ) %>% 
-            highchart_cpi_yoy_mom("Canada", selected_group, ema = selected_ema_window)
+            highchart_cpi_yoy_mom(date_range = date_range, "Canada", selected_group, ema = selected_ema_window)
         ),
         column(
           width = 6,
           cpi %>% 
-            filter(
-              ref_date >= date_range[1],
-              ref_date <= date_range[2]
-            ) %>% 
-            highchart_cpi_yoy_mom(selected_geography, selected_group, ema = selected_ema_window)
+            highchart_cpi_yoy_mom(date_range = date_range, selected_geography, selected_group, ema = selected_ema_window)
         )
       )
       
@@ -372,11 +352,26 @@ output$select_province_map <-
         ref_date == max(ref_date)
       )
     
+    if(selected_geography == "Canada") {
+    
+      color_vector <-
+        rep("#FF0000", 10)  
+      
+    } else {
+      
+      color_vector <-
+        ifelse(map_provinces$PRENAME == selected_geography, "#FF0000", "#e6e6e6")
+      
+    }
+    
     map_provinces_cpi <-
       map_provinces %>% 
       left_join(
         cpi_all_items_provinces,
         by = c("PRENAME" = "geo")
+      ) %>% 
+      mutate(
+        color = color_vector
       )
     
     canada_map <-
@@ -385,7 +380,7 @@ output$select_province_map <-
       addPolygons(
         data = map_provinces_cpi, 
         weight = 5, 
-        col = 'red', 
+        col = ~color, 
         layerId = ~PRENAME,
         label = ~paste0(PRENAME, " - CPI: ", yoy, "%")
         

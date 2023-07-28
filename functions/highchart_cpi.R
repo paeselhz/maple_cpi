@@ -1,10 +1,12 @@
 
 highchart_cpi_yoy_mom <-
-  function(df, selected_geography = "Canada", selected_group = "All-items", ema = 0) {
+  function(df, date_range, selected_geography = "Canada", selected_group = "All-items", ema = 0) {
     
     cpi_calculated <-
       calculate_mom_yoy(df, selected_geography, selected_group, ema_window = ema) %>% 
       filter(
+        ref_date >= date_range[1],
+        ref_date <= date_range[2],
         !is.na(yoy)
       )
     

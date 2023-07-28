@@ -11,6 +11,6 @@ home <-
     column(
       width = 9,
       h3("Current status of Canadian economy"),
-      p("Add cards here (CPI YOY, MOM, Interest rate?)")
+      uiOutput("home_cards_economy")
     )
   )
