@@ -49,7 +49,7 @@ highchart_cpi_yoy_mom <-
           data = cpi_calculated,
           type = "line",
           hcaes(x = ref_date, y = ema),
-          name = "YoY% Exp. Moving Average"
+          name = paste0("YoY% Exp. Moving Average - ", ema, " Months")
         )
       
     } else {

@@ -77,7 +77,7 @@ output$cpi_yoy_groups <-
     date_range <-
       input$group_analysis_date_range
     
-    calculate_mom_yoy(cpi, "Canada", major_groups[2:9]) %>% 
+    calculate_mom_yoy(cpi, "Canada", major_groups[2:9], ema_window = 0) %>% 
       filter(
         !is.na(yoy),
         ref_date >= date_range[1],
@@ -127,7 +127,7 @@ output$cpi_mom_groups <-
     date_range <-
       input$group_analysis_date_range
     
-    calculate_mom_yoy(cpi, "Canada", major_groups[2:9]) %>% 
+    calculate_mom_yoy(cpi, "Canada", major_groups[2:9], ema_window = 0) %>% 
       filter(
         !is.na(yoy),
         ref_date >= date_range[1],

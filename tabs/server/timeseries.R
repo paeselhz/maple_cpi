@@ -284,6 +284,9 @@ output$render_highcharts <-
     date_range <- 
       input$timeseries_date_range
     
+    selected_ema_window <-
+      ifelse(input$checkbox_ema, input$ema_window, 0)
+    
     if(
       selected_geography == "Canada"
     ) {
@@ -298,7 +301,7 @@ output$render_highcharts <-
                 ref_date >= date_range[1],
                 ref_date <= date_range[2]
               ) %>% 
-              highchart_cpi_yoy_mom(ema = 12)
+              highchart_cpi_yoy_mom(ema = selected_ema_window)
           )
         )
         
@@ -312,7 +315,7 @@ output$render_highcharts <-
                 ref_date >= date_range[1],
                 ref_date <= date_range[2]
               ) %>% 
-              highchart_cpi_yoy_mom("Canada", "All-items")
+              highchart_cpi_yoy_mom("Canada", "All-items", ema = selected_ema_window)
           ),
           column(
             width = 6,
@@ -321,7 +324,7 @@ output$render_highcharts <-
                 ref_date >= date_range[1],
                 ref_date <= date_range[2]
               ) %>% 
-              highchart_cpi_yoy_mom("Canada", selected_group)
+              highchart_cpi_yoy_mom("Canada", selected_group, ema = selected_ema_window)
           )
         )
         
@@ -339,7 +342,7 @@ output$render_highcharts <-
               ref_date >= date_range[1],
               ref_date <= date_range[2]
             ) %>% 
-            highchart_cpi_yoy_mom("Canada", selected_group)
+            highchart_cpi_yoy_mom("Canada", selected_group, ema = selected_ema_window)
         ),
         column(
           width = 6,
@@ -348,7 +351,7 @@ output$render_highcharts <-
               ref_date >= date_range[1],
               ref_date <= date_range[2]
             ) %>% 
-            highchart_cpi_yoy_mom(selected_geography, selected_group)
+            highchart_cpi_yoy_mom(selected_geography, selected_group, ema = selected_ema_window)
         )
       )
       

@@ -1,6 +1,6 @@
 
 calculate_mom_yoy <-
-  function(df, selected_geography, selected_group, ema_window) {
+  function(df, selected_geography, selected_group, ema_window = 0) {
     
     mom_yoy_df <-
       df %>% 
@@ -20,10 +20,17 @@ calculate_mom_yoy <-
       ungroup() %>% 
       filter(
         !is.na(yoy)
-      ) %>% 
-      mutate(
-        ema = pracma::movavg(yoy, ema_window, type = "e")
       )
+    
+    if(ema_window) {
+      
+      mom_yoy_df <-
+        mom_yoy_df %>% 
+        mutate(
+          ema = pracma::movavg(yoy, ema_window, type = "e")
+        )
+      
+    }
     
     return(mom_yoy_df)
     

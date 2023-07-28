@@ -4,7 +4,7 @@ timeseries <-
     value = "timeseries",
     fluidRow(
       column(
-        width = 4,
+        width = 6,
         radioGroupButtons(
           inputId = "timeseries_manual_range",
           label = "Time frame",
@@ -20,7 +20,7 @@ timeseries <-
         )
       ),
       column(
-        width = 4,
+        width = 3,
         airDatepickerInput(
           inputId = "timeseries_date_range",
           label = "Select a date range",
@@ -29,7 +29,7 @@ timeseries <-
         )
       ),
       column(
-        width = 4,
+        width = 3,
         fluidRow(
           column(
             width = 6,
@@ -43,7 +43,8 @@ timeseries <-
             width = 6,
             conditionalPanel(
               "input.checkbox_ema",
-              shinyWidgets::numericInputIcon(
+              # shinyWidgets::numericInputIcon(
+              numericInput(
                 inputId = "ema_window",
                 label = "Time window for EMA",
                 min = 3,
