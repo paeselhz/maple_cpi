@@ -7,7 +7,7 @@ group_analysis <-
         width = 3,
         radioGroupButtons(
           inputId = "comparison_yoy_mom",
-          label = NULL,
+          label = " ",
           choices = c("YoY" = "yoy", "MoM" = "mom"),
           selected = "yoy",
           individual = TRUE,
@@ -15,7 +15,7 @@ group_analysis <-
         )
       ),
       column(
-        width = 6,
+        width = 5,
         radioGroupButtons(
           inputId = "group_analysis_manual_range",
           label = "Time frame",
@@ -38,6 +38,13 @@ group_analysis <-
           label = "Select a date range",
           range = TRUE,
           value = c(ymd(max(cpi$ref_date)) - years(5), max(cpi$ref_date)) + 1
+        )
+      ),
+      column(
+        width = 1,
+        actionBttn(
+          inputId = "show_group_analysis_faq",
+          icon = icon("question-circle")
         )
       )
     ),

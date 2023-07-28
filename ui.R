@@ -1,5 +1,6 @@
 shinyUI(
   fluidPage(
+    tags$div(icon("check"), style = "display: none;"),
     navbarPage(
       title = "Maple CPI",
       theme = "styles.css",

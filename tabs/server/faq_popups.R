@@ -1,3 +1,20 @@
+
+observeEvent(
+  input$show_group_analysis_faq, 
+  {
+    
+    group_analysis_faq(session)
+    
+  })
+
+observeEvent(
+  input$show_interest_rates_faq, 
+  {
+    
+    interest_rates_faq(session)
+    
+  })
+
 observeEvent(
   input$navbar,
   {
@@ -16,3 +33,4 @@ observeEvent(
     simulation_faq(session)
     
   })
+

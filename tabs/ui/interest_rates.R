@@ -7,7 +7,7 @@ interest_rates <-
         width = 3
       ),
       column(
-        width = 6,
+        width = 5,
         radioGroupButtons(
           inputId = "interest_rates_manual_range",
           label = "Time frame",
@@ -30,6 +30,13 @@ interest_rates <-
           label = "Select a date range",
           range = TRUE,
           value = c(ymd(max(boc_rates$date) - years(5)), max(boc_rates$date)) + 1
+        )
+      ),
+      column(
+        width = 1,
+        actionBttn(
+          inputId = "show_interest_rates_faq",
+          icon = icon("question-circle")
         )
       )
     ),
