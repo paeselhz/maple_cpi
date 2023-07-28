@@ -4,6 +4,17 @@ cpi_simulation <-
     value = "simulation",
     fluidRow(
       column(
+        width = 3,
+        pickerInput(
+          inputId = "simulation_cpi_groups",
+          label = "Selected groups for custom CPI",
+          choices = major_groups[2:9],
+          selected = major_groups[2:9],
+          options = list(`actions-box` = TRUE),
+          multiple = TRUE
+        )
+      ),
+      column(
         width = 6,
         radioGroupButtons(
           inputId = "simulation_manual_range",
@@ -31,16 +42,7 @@ cpi_simulation <-
     ),
     fluidRow(
       column(
-        width = 3,
-        checkboxGroupInput(
-          inputId = "simulation_cpi_groups",
-          label = "Selected groups for custom CPI",
-          choices = major_groups[2:9],
-          selected = major_groups[2:9]
-        )
-      ),
-      column(
-        width = 9,
+        width = 12,
         highchartOutput("cpi_simulation", height = "600px") %>%
           withSpinner(type = 4, color = "#e6e6e6")
       )
