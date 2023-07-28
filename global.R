@@ -74,6 +74,19 @@ major_groups <-
     "Alcoholic beverages, tobacco products and recreational cannabis"
   )
 
+icon_groups <-
+  c(
+    "glyphicon-asterisk",
+    "glyphicon-cutlery",
+    "glyphicon-home",
+    "glyphicon-wrench",
+    "glyphicon-sunglasses",
+    "glyphicon-plane",
+    "glyphicon-heart",
+    "glyphicon-book",
+    "glyphicon-glass"
+  )
+
 map_provinces <-
   readr::read_rds('data/map_provinces.rds') %>% 
   filter(

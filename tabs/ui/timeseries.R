@@ -64,6 +64,9 @@ timeseries <-
         label = "Select a CPI group:",
         choices = major_groups,
         selected = major_groups[1],
+        choicesOpt = list(
+          icon = icon_groups
+        ),
         multiple = FALSE
       ),
       shinyWidgets::pickerInput(

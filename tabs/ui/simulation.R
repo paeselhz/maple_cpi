@@ -11,6 +11,9 @@ cpi_simulation <-
           choices = major_groups[2:9],
           selected = major_groups[2:9],
           options = list(`actions-box` = TRUE),
+          choicesOpt = list(
+            icon = icon_groups[2:9]
+          ),
           multiple = TRUE
         )
       ),
