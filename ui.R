@@ -8,7 +8,8 @@ shinyUI(
       home,
       timeseries,
       group_analysis,
-      interest_rates
+      interest_rates,
+      cpi_simulation
     )
   )
 )
