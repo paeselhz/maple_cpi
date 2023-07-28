@@ -3,6 +3,7 @@ shinyUI(
     navbarPage(
       title = "Maple CPI",
       theme = "styles.css",
+      id = "navbar",
       selected = "home",
       fluid = T,
       home,

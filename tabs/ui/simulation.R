@@ -15,7 +15,7 @@ cpi_simulation <-
         )
       ),
       column(
-        width = 6,
+        width = 5,
         radioGroupButtons(
           inputId = "simulation_manual_range",
           label = "Time frame",
@@ -37,6 +37,13 @@ cpi_simulation <-
           label = "Select a date range",
           range = TRUE,
           value = c(min(cpi$ref_date), max(cpi$ref_date)) + 1
+        ),
+      ),
+      column(
+        width = 1,
+        actionBttn(
+          inputId = "show_simulation_faq",
+          icon = icon("question-circle")
         )
       )
     ),

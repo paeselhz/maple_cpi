@@ -9,6 +9,7 @@ library(shinycssloaders)
 
 source('functions/utils.R')
 source('functions/highchart_cpi.R')
+source('functions/sweet_alert_faqs.R')
 source('functions/calculate_mom_yoy.R')
 
 boc_rates <-
