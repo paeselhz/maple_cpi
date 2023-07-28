@@ -375,7 +375,7 @@ output$select_province_map <-
       )
     
     canada_map <-
-      leaflet()  %>% 
+      leaflet(options = leafletOptions(zoomControl = FALSE))  %>% 
       addTiles() %>% 
       addPolygons(
         data = map_provinces_cpi, 
