@@ -4,6 +4,17 @@ group_analysis <-
     value = "group_analysis",
     fluidRow(
       column(
+        width = 3,
+        radioGroupButtons(
+          inputId = "comparison_yoy_mom",
+          label = NULL,
+          choices = c("YoY" = "yoy", "MoM" = "mom"),
+          selected = "yoy",
+          individual = TRUE,
+          justified = TRUE
+        )
+      ),
+      column(
         width = 6,
         radioGroupButtons(
           inputId = "group_analysis_manual_range",
@@ -27,17 +38,6 @@ group_analysis <-
           label = "Select a date range",
           range = TRUE,
           value = c(ymd(max(cpi$ref_date)) - years(5), max(cpi$ref_date)) + 1
-        )
-      ),
-      column(
-        width = 3,
-        radioGroupButtons(
-          inputId = "comparison_yoy_mom",
-          label = NULL,
-          choices = c("YoY" = "yoy", "MoM" = "mom"),
-          selected = "yoy",
-          individual = TRUE,
-          justified = TRUE
         )
       )
     ),

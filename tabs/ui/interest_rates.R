@@ -4,6 +4,9 @@ interest_rates <-
     value = "interest_rates",
     fluidRow(
       column(
+        width = 3
+      ),
+      column(
         width = 6,
         radioGroupButtons(
           inputId = "interest_rates_manual_range",
@@ -21,7 +24,7 @@ interest_rates <-
         )
       ),
       column(
-        width = 6,
+        width = 3,
         airDatepickerInput(
           inputId = "interest_rates_date_range",
           label = "Select a date range",
