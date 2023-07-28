@@ -87,15 +87,15 @@ click_province <-
           return("Canada")
           
         } else {
-         
+          
           shape_click_info <- input$select_province_map_shape_click
           
           shape_click_id <- shape_click_info$id
           
           return(shape_click_id)
-           
+          
         }
-         
+        
       }
       
     })
@@ -365,11 +365,45 @@ output$select_province_map <-
     selected_geography <-
       input$selected_geography
     
+    cpi_all_items_provinces <-
+      purrr::map_df(
+        .x = geographical_locations[2:11],
+        function(x) {
+          
+          calculate_mom_yoy(cpi, x, "All-items") %>% 
+            filter(
+              !is.na(yoy),
+              ref_date == max(ref_date)
+            ) %>% 
+            mutate(
+              PRENAME = x
+            )
+          
+        }
+      )
+    
+    map_provinces_cpi <-
+      map_provinces %>% 
+      left_join(
+        cpi_all_items_provinces,
+        by = "PRENAME"
+      )
+    
+    canada_map <-
+      leaflet()  %>% 
+      addTiles() %>% 
+      addPolygons(
+        data = map_provinces_cpi, 
+        weight = 5, 
+        col = 'red', 
+        layerId = ~PRENAME,
+        label = ~paste0(PRENAME, " - CPI: ", yoy, "%")
+        
+      )
+    
     if(selected_geography == "Canada") {
       
-      leaflet()  %>% 
-        addTiles() %>% 
-        addPolygons(data = map_provinces, weight = 5, col = 'red', layerId = ~PRENAME)
+      canada_map
       
     } else {
       
@@ -381,9 +415,7 @@ output$select_province_map <-
         sf::st_bbox() %>% 
         unname()
       
-      leaflet()  %>% 
-        addTiles() %>% 
-        addPolygons(data = map_provinces, weight = 5, col = 'red', layerId = ~PRENAME) %>% 
+      canada_map %>% 
         fitBounds(lng1 = prov_map_bounds[1], 
                   lat1 = prov_map_bounds[2], 
                   lng2 = prov_map_bounds[3], 

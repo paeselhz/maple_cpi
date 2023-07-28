@@ -21,7 +21,7 @@ cpi <-
     'data/cpi_transformed.rds'
   ) %>% 
   filter(
-    ref_date >= as.Date("2002-01-01")
+    ref_date >= as.Date("2001-01-01")
   )
 
 basket_weights <-
