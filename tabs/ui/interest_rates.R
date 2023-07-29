@@ -2,6 +2,7 @@ interest_rates <-
   tabPanel(
     title = "Interest rates",
     value = "interest_rates",
+    hr(),
     fluidRow(
       column(
         width = 3

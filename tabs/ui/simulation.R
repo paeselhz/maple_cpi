@@ -2,6 +2,7 @@ cpi_simulation <-
   tabPanel(
     title = "Simulation",
     value = "simulation",
+    hr(),
     fluidRow(
       column(
         width = 3,

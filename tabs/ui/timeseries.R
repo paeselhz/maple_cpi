@@ -2,6 +2,7 @@ timeseries <-
   tabPanel(
     title = "Timeseries",
     value = "timeseries",
+    hr(),
     fluidRow(
       column(
         width = 3,

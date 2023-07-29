@@ -2,6 +2,7 @@ group_analysis <-
   tabPanel(
     title = "Group Analysis",
     value = "group_analysis",
+    hr(),
     fluidRow(
       column(
         width = 3,
