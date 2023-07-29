@@ -1,5 +1,13 @@
 
 observeEvent(
+  input$show_timeseries_faq, 
+  {
+    
+    timeseries_faq(session)
+    
+  })
+
+observeEvent(
   input$show_group_analysis_faq, 
   {
     

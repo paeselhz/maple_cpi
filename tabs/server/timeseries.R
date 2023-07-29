@@ -383,7 +383,6 @@ output$select_province_map <-
         col = ~color, 
         layerId = ~PRENAME,
         label = ~paste0(PRENAME, " - CPI: ", yoy, "%")
-        
       )
     
     if(selected_geography == "Canada") {

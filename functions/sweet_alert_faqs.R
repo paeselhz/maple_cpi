@@ -1,23 +1,39 @@
-simulation_faq <-
+
+timeseries_faq <-
   function(session) {
     
-    simulation_faq_text <-
+    timeseries_faq_text <-
       HTML(
         paste0(
-          "For this tab, the user can create different scenarios related to
-        the Canadian Consumer Price Index, most known as CPI. They can create
-        customized indexes using one (or more) of the eight major inflation
-        groups.",
-          "<br><hr>",
-          "This experience allows some simulations like checking what would the
-        CPI be like without a certain group, or only with selected groups."
+          "TBD"
         )
       )
     
     sendSweetAlert(
       session = session,
-      title = "Simulation - FAQ",
-      text = simulation_faq_text,
+      title = "Time Series - FAQ",
+      text = timeseries_faq_text,
+      type = "question",
+      html = TRUE
+    )
+    
+  }
+
+
+group_analysis_faq <-
+  function(session) {
+    
+    group_analysis_faq_text <-
+      HTML(
+        paste0(
+          "TBD"
+        )
+      )
+    
+    sendSweetAlert(
+      session = session,
+      title = "Group Analysis - FAQ",
+      text = group_analysis_faq_text,
       type = "question",
       html = TRUE
     )
@@ -49,21 +65,26 @@ interest_rates_faq <-
     
   }
 
-
-group_analysis_faq <-
+simulation_faq <-
   function(session) {
     
-    group_analysis_faq_text <-
+    simulation_faq_text <-
       HTML(
         paste0(
-          "TBD"
+          "For this tab, the user can create different scenarios related to
+        the Canadian Consumer Price Index, most known as CPI. They can create
+        customized indexes using one (or more) of the eight major inflation
+        groups.",
+          "<br><hr>",
+          "This experience allows some simulations like checking what would the
+        CPI be like without a certain group, or only with selected groups."
         )
       )
     
     sendSweetAlert(
       session = session,
-      title = "Group Analysis - FAQ",
-      text = group_analysis_faq_text,
+      title = "Simulation - FAQ",
+      text = simulation_faq_text,
       type = "question",
       html = TRUE
     )

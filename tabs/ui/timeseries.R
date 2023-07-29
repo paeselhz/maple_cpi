@@ -4,31 +4,6 @@ timeseries <-
     value = "timeseries",
     fluidRow(
       column(
-        width = 6,
-        radioGroupButtons(
-          inputId = "timeseries_manual_range",
-          label = "Time frame",
-          choices = c("All" = -1, "1 Year" = 1, "2 Years" = 2, "3 Years" = 3, "5 Years" = 5),
-          individual = TRUE,
-          justified = TRUE,
-          checkIcon = list(
-            yes = tags$i(class = "fa fa-circle",
-                         style = "color: steel-blue"),
-            no = tags$i(class = "fa fa-circle-o",
-                        style = "color: steel-blue")
-          )
-        )
-      ),
-      column(
-        width = 3,
-        airDatepickerInput(
-          inputId = "timeseries_date_range",
-          label = "Select a date range",
-          range = TRUE,
-          value = c(min(cpi$ref_date), max(cpi$ref_date)) + 1
-        )
-      ),
-      column(
         width = 3,
         fluidRow(
           column(
@@ -54,6 +29,38 @@ timeseries <-
               )
             )
           )
+        )
+      ),
+      column(
+        width = 5,
+        radioGroupButtons(
+          inputId = "timeseries_manual_range",
+          label = "Time frame",
+          choices = c("All" = -1, "1 Year" = 1, "2 Years" = 2, "3 Years" = 3, "5 Years" = 5),
+          individual = TRUE,
+          justified = TRUE,
+          checkIcon = list(
+            yes = tags$i(class = "fa fa-circle",
+                         style = "color: steel-blue"),
+            no = tags$i(class = "fa fa-circle-o",
+                        style = "color: steel-blue")
+          )
+        )
+      ),
+      column(
+        width = 3,
+        airDatepickerInput(
+          inputId = "timeseries_date_range",
+          label = "Select a date range",
+          range = TRUE,
+          value = c(min(cpi$ref_date), max(cpi$ref_date)) + 1
+        )
+      ),
+      column(
+        width = 1,
+        actionBttn(
+          inputId = "show_timeseries_faq",
+          icon = icon("question-circle")
         )
       )
     ),
