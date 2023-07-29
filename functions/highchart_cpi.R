@@ -35,12 +35,7 @@ highchart_cpi_yoy_mom <-
       ) %>% 
       hc_title(
         text = paste0(
-          "CPI data for: ", selected_group
-        )
-      ) %>% 
-      hc_subtitle(
-        text = paste0(
-          "Geographical location: ", selected_geography
+          "CPI data for: ", selected_group, " - ", selected_geography
         )
       ) %>% 
       hc_exporting(
