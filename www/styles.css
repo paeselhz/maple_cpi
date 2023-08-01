@@ -8,6 +8,10 @@
   border: none;
 }
 
+.home-text-box {
+  text-align: justify;
+}
+
 /*.container-fluid {
   padding-right: 0;
   padding-left: 0;

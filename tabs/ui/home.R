@@ -3,7 +3,7 @@ home <-
     title = "Home",
     value = "home",
     hr(),
-    h1("Maple CPI - Canadian CPI explorer", style = "text-align: center;"),
+    h1("<strong>Maple CPI</strong> - Canadian CPI explorer", style = "text-align: center;"),
     fluidRow(
       column(
         width = 12,
@@ -15,8 +15,26 @@ home <-
       column(
         width = 12,
         class = "home-text-box",
-        h3("Canadian Consumer Price Index"),
-        p("explaining CPI? Datasources?"),
+        HTML("<h1>Welcome to <strong>Maple CPI</strong></h1>"),
+        br(),
+        HTML(
+          paste0(
+            "<h4>",
+            "<strong>Maple CPI</strong> is a tool developed to allow people from 
+            different backgrounds to develop a better understanding to the 
+            currrent state of the economy in Canada, allowing generic users to 
+            grasp the information on their bills rising, while also being a tool 
+            for advanced users to build analysis, develop charts and export 
+            information related to the Canadian Consumer Price Index (CPI).",
+            "The main focus of this project is to deliver clear insights that are
+            easily understable, while maintaning the ability for more experienced
+            users to explore underrated views related to the evolution of inflation
+            in Canada. To achieve this goal, the project employs different data-related
+            techniques, resulting in a tool that can, in a very straightforward way,
+            shed some light on the economic intricacies that surround Canada.",
+            "</h4>"
+          )
+        )
       ) 
     )
   )
