@@ -17,6 +17,7 @@ output$home_cards_economy <-
     
     fluidRow(
       column(
+        class = "column-cards",
         width = 4,
         card_info(
           text = "Canadian CPI - YoY%",
@@ -26,6 +27,7 @@ output$home_cards_economy <-
         )
       ),
       column(
+        class = "column-cards",
         width = 4,
         card_info(
           text = "Canadian CPI - MoM%",
@@ -35,6 +37,7 @@ output$home_cards_economy <-
         )
       ),
       column(
+        class = "column-cards",
         width = 4,
         card_info(
           text = "Target Interest Rate",

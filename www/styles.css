@@ -21,6 +21,12 @@
 
 /*cards info*/
 
+.col-sm-6.column-cards, .col-sm-4.column-cards, .col-sm-3.column-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-info {
   position: relative;
   display: flex;

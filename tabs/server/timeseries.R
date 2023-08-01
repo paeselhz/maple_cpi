@@ -134,6 +134,7 @@ output$render_cards <-
         
         fluidRow(
           column(
+            class = "column-cards",
             width = 6,
             card_info(
               text = "Latest CPI YoY%",
@@ -143,6 +144,7 @@ output$render_cards <-
             )
           ),
           column(
+            class = "column-cards",
             width = 6,
             card_info(
               text = "Latest CPI MoM%",
@@ -171,6 +173,7 @@ output$render_cards <-
         
         fluidRow(
           column(
+            class = "column-cards",
             width = 3,
             card_info(
               text = paste0("Latest CPI YoY%"),
@@ -180,6 +183,7 @@ output$render_cards <-
             )
           ),
           column(
+            class = "column-cards",
             width = 3,
             card_info(
               text = paste0("Latest CPI MoM%"),
@@ -189,6 +193,7 @@ output$render_cards <-
             )
           ),
           column(
+            class = "column-cards",
             width = 3,
             card_info(
               text = paste0("Latest CPI YoY% - ", selected_group),
@@ -198,6 +203,7 @@ output$render_cards <-
             )
           ),
           column(
+            class = "column-cards",
             width = 3,
             card_info(
               text = paste0("Latest CPI MoM% - ", selected_group),
@@ -208,10 +214,7 @@ output$render_cards <-
           )
         )
         
-        
       }
-      
-      
       
     } else {
       
@@ -231,6 +234,7 @@ output$render_cards <-
       
       fluidRow(
         column(
+          class = "column-cards",
           width = 3,
           card_info(
             text = paste0("Latest CPI YoY% - ", selected_group),
@@ -240,6 +244,7 @@ output$render_cards <-
           )
         ),
         column(
+          class = "column-cards",
           width = 3,
           card_info(
             text = paste0("Latest CPI MoM% - ", selected_group),
@@ -249,6 +254,7 @@ output$render_cards <-
           )
         ),
         column(
+          class = "column-cards",
           width = 3,
           card_info(
             text = paste0("Latest CPI YoY% - ", selected_group),
@@ -258,6 +264,7 @@ output$render_cards <-
           )
         ),
         column(
+          class = "column-cards",
           width = 3,
           card_info(
             text = paste0("Latest CPI MoM% - ", selected_group),
