@@ -1,3 +1,13 @@
+/*body*/
+
+body {
+  font-family: 'Montserrat', 'Source Sans Pro', sans-serif;
+}
+
+element.style {
+    padding-top: 50px;
+}
+
 /*navbar*/
 
 .navbar {

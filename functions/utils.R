@@ -1,4 +1,23 @@
 
+maple_cpi_theme <-
+  hc_theme(
+    title = list(
+      style = list(
+        fontFamily = "Montserrat"
+      )
+    ),
+    subtitle = list(
+      style = list(
+        fontFamily = "Montserrat"
+      )
+    ),
+    legend = list(
+      itemStyle = list(
+        fontFamily = "Montserrat"
+      )
+    )
+  )
+
 card_info <-
   function(text, value, region, color) {
     

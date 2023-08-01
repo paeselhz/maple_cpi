@@ -3,7 +3,7 @@ home <-
     title = "Home",
     value = "home",
     hr(),
-    h1("<strong>Maple CPI</strong> - Canadian CPI explorer", style = "text-align: center;"),
+    HTML('<h1 style="text-align:center"><strong>Maple CPI</strong> - Canadian CPI explorer</h1>'),
     fluidRow(
       column(
         width = 12,
