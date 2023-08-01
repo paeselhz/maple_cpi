@@ -52,13 +52,20 @@ group_analysis <-
     fluidRow(
       column(
         width = 12,
-        highchartOutput("cpi_groups", height = "600px") %>% 
-          withSpinner(type = 4, color = "#e6e6e6")
+        tabsetPanel(
+          tabPanel(
+            title = "CPI Decomposition",
+            value = "cpi_decomposition",
+            highchartOutput("cpi_groups", height = "600px") %>% 
+              withSpinner(type = 4, color = "#e6e6e6")
+          ),
+          tabPanel(
+            title = "CPI Shares",
+            value = "cpi_shares",
+            highchartOutput("cpi_shares", height = "600px") %>% 
+              withSpinner(type = 4, color = "#e6e6e6")
+          )
+        )
       )
-      # column(
-      #   width = 6,
-      #   highchartOutput("cpi_mom_groups") %>% 
-      #     withSpinner(type = 4, color = "#e6e6e6")
-      # )
     )
   )

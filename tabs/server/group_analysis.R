@@ -130,3 +130,82 @@ output$cpi_groups <-
       )
     
   })
+
+output$cpi_shares <-
+  renderHighchart({
+    
+    date_range <-
+      input$group_analysis_date_range
+    
+    selected_comparison <-
+      input$comparison_yoy_mom
+    
+    calculate_mom_yoy(cpi, "Canada", major_groups[2:9], ema_window = 0) %>% 
+      filter(
+        !is.na(yoy),
+        ref_date >= date_range[1],
+        ref_date <= date_range[2]
+      ) %>% 
+      full_join(
+        basket_weights %>% 
+          filter(geo == "Canada") %>% 
+          select(
+            products_and_product_groups,
+            basket_weights,
+            start_month,
+            end_month
+          ),
+        by = "products_and_product_groups",
+        relationship = "many-to-many"
+      ) %>% 
+      filter(
+        ref_date >= start_month & ref_date <= end_month
+      ) %>% 
+      mutate(
+        abs_contribution = abs(!!sym(selected_comparison))*basket_weights/100
+      ) %>% 
+      group_by(ref_date) %>% 
+      mutate(
+        sum_abs_contribution = sum(abs_contribution)
+      ) %>% 
+      ungroup() %>% 
+      mutate(
+        share_abs_contribution = (abs_contribution/sum_abs_contribution)*100
+      ) %>% 
+      select(
+        ref_date,
+        products_and_product_groups,
+        share_abs_contribution
+      ) %>% 
+      hchart(
+        "column",
+        hcaes(x = ref_date, y = share_abs_contribution, group = "products_and_product_groups"),
+        stacking = "normal"
+      ) %>% 
+      hc_tooltip(
+        valueDecimals = 3
+      ) %>% 
+      hc_xAxis(
+        title = list(text = "Reference Date")
+      ) %>% 
+      hc_yAxis(
+        title = list(text = "CPI")
+      ) %>% 
+      hc_title(
+        text = paste0(
+          "CPI ", 
+          ifelse(selected_comparison == "mom", "MoM", "YoY"), 
+          " % by Major Groups of Products"
+        )
+      ) %>% 
+      hc_subtitle(
+        text = paste0(
+          "Share of monthly contribution to CPI"
+        )
+      ) %>% 
+      hc_exporting(
+        enabled = TRUE
+      )
+    
+    
+  })
