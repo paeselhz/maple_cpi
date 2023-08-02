@@ -5,7 +5,16 @@ timeseries_faq <-
     timeseries_faq_text <-
       HTML(
         paste0(
-          "TBD"
+          "The main objective of this page is to allow the users to view and compare
+          data about inflation in different time periods, different groups of items, 
+          and different regionalities as well. Since the economy for each province is unique,
+          this tab provides a way of exploring through different angles how inflation is
+          affecting different sectors and different regions.",
+          "<hr>",
+          "Also, to allow users to visualize trends in the Consumer Price Index series, 
+          there is a button that creates an <strong>Exponential Moving Average</strong>, 
+          with the possibility for the user to select different time windows to create this
+          metric."
         )
       )
     
@@ -26,7 +35,15 @@ group_analysis_faq <-
     group_analysis_faq_text <-
       HTML(
         paste0(
-          "TBD"
+          "The group analysis tab can be interpreted as an exercise of decomposing
+          the Canadian inflation into it's eight major groups of items. The proposition
+          is a view of the current status of the Canadian inflation, and the share of
+          contribution for this inflation given by the basket weights set by Statistics Canada.",
+          "<hr>",
+          "Also, this view can compare the Year-over-Year decomposition, as well as the 
+          Month-over-Month decomposition. Another view is comparing the absolute contributions
+          to monthly inflation data, and exploring the share of the inflation that is given
+          by a major attribute."
         )
       )
     
