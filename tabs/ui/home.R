@@ -36,5 +36,11 @@ home <-
           )
         )
       ) 
+    ),
+    fluidRow(
+      actionBttn(
+        inputId = "button_major_cpi_groups",
+        label = "CPI Major Groups"
+      )
     )
   )
