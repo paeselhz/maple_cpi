@@ -59,10 +59,20 @@ timeseries <-
       ),
       column(
         width = 1,
+        # column(
+        #   width = 6,
+        #   actionBttn(
+        #     inputId = "test_bookmark",
+        #     icon = icon("paper-plane")
+        #   )
+        # ),
+        # column(
+        # width = 6,
         actionBttn(
           inputId = "show_timeseries_faq",
           icon = icon("question-circle")
         )
+        # )
       )
     ),
     column(
