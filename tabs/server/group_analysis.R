@@ -127,6 +127,9 @@ output$cpi_groups <-
       ) %>% 
       hc_exporting(
         enabled = TRUE
+      ) %>% 
+      hc_add_theme(
+        maple_cpi_theme
       )
     
   })
@@ -205,6 +208,9 @@ output$cpi_shares <-
       ) %>% 
       hc_exporting(
         enabled = TRUE
+      ) %>% 
+      hc_add_theme(
+        maple_cpi_theme
       )
     
     

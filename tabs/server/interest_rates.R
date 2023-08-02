@@ -120,6 +120,9 @@ output$interest_rates_plot <-
         ) %>% 
         hc_exporting(
           enabled = TRUE
+        ) %>% 
+        hc_add_theme(
+          maple_cpi_theme
         )
       
     }

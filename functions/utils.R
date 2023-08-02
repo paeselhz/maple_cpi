@@ -15,18 +15,8 @@ gh_corner <-
 
 maple_cpi_theme <-
   hc_theme(
-    title = list(
+    chart = list(
       style = list(
-        fontFamily = "Montserrat"
-      )
-    ),
-    subtitle = list(
-      style = list(
-        fontFamily = "Montserrat"
-      )
-    ),
-    legend = list(
-      itemStyle = list(
         fontFamily = "Montserrat"
       )
     )

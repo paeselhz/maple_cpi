@@ -153,6 +153,9 @@ output$cpi_simulation <-
         ) %>% 
         hc_exporting(
           enabled = TRUE
+        ) %>% 
+        hc_add_theme(
+          maple_cpi_theme
         )
       
     }

@@ -5,7 +5,7 @@ account: paese
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9522926
-bundleId: 7520921
+bundleId: 7520958
 url: https://paese.shinyapps.io/maple_cpi/
 version: 1
 asMultiple: FALSE
