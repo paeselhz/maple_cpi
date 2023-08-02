@@ -1,5 +1,6 @@
 shinyUI(
   fluidPage(
+    gh_corner("https://github.com/paeselhz/maple_cpi"),
     tags$style(
       "@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');"
     ),
