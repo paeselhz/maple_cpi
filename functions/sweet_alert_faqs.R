@@ -28,7 +28,8 @@ major_groups_faq <-
       title = "CPI Major Groups",
       text = major_groups_faq_text,
       type = "question",
-      html = TRUE
+      html = TRUE,
+      width = "50em"
     )
     
   }

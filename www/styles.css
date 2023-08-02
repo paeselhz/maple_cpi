@@ -116,9 +116,3 @@ element.style {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a box-shadow effect on hover */
   transform: scale(1.05); /* Increase the size by 5% on hover (adjust the scale value as desired) */
 }
-
-/*sweet-alert-popup*/
-
-.swal2-popup {
-    width: 65em; !important 
-}
