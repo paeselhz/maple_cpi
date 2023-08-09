@@ -110,6 +110,44 @@ observe({
   
 })
 
+output$render_main_timeseries <-
+  renderUI({
+    
+    selected_geography <-
+      input$selected_geography
+    
+    selected_group <-
+      input$selected_group
+    
+    date_range <- 
+      input$timeseries_date_range
+    
+    selected_ema_window <-
+      ifelse(input$checkbox_ema, input$ema_window, 0)
+    
+    if(
+      selected_geography == "Canada"
+    ) {
+      
+      if(
+        selected_group == "All-items"
+      ) {
+        
+        fluidRow(
+          column(
+            width = 12, 
+            cpi %>% 
+              timeseries_main(date_range = date_range, ema = selected_ema_window)
+            
+          )
+        )
+        
+      }
+      
+    }
+    
+  })
+
 output$render_cards <-
   renderUI({
     

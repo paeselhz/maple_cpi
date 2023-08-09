@@ -1,9 +1,19 @@
 
 highchart_cpi_yoy_mom <-
-  function(df, date_range, selected_geography = "Canada", selected_group = "All-items", ema = 0) {
+  function(df, date_range, ema = 0) {
     
-    cpi_calculated <-
-      calculate_mom_yoy(df, selected_geography, selected_group, ema_window = ema) %>% 
+    selected_geography <-
+      df %>% 
+      pull(geo) %>% 
+      unique()
+    
+    selected_group <-
+      df %>% 
+      pull(products_and_product_groups) %>% 
+      unique()
+    
+    df_filtered <-
+      df %>% 
       filter(
         ref_date >= date_range[1],
         ref_date <= date_range[2],
@@ -11,14 +21,14 @@ highchart_cpi_yoy_mom <-
       )
     
     hc_return <-
-      cpi_calculated %>% 
+      df_filtered %>% 
       hchart(
         "line",
         hcaes(x = ref_date, y = yoy),
         name = "CPI Year-Over-Year"
       ) %>% 
       hc_add_series(
-        data = cpi_calculated,
+        data = df_filtered,
         type = "line",
         hcaes(x = ref_date, y = mom),
         name = "CPI Month-Over-Month"
@@ -49,7 +59,7 @@ highchart_cpi_yoy_mom <-
       
       hc_return %>% 
         hc_add_series(
-          data = cpi_calculated,
+          data = df_filtered,
           type = "line",
           hcaes(x = ref_date, y = ema),
           name = paste0("YoY% Exp. Moving Average - ", ema, " Months")

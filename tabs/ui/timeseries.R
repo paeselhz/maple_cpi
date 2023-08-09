@@ -95,13 +95,14 @@ timeseries <-
         multiple = FALSE
       ),
       leafletOutput("select_province_map") %>% 
-        withSpinner(type = 4, color = "#e6e6e6")
+        withSpinner(type = 4, color = "#727272")
     ),
     column(
       width = 9,
-      uiOutput("render_cards"),
-      uiOutput("render_highcharts") %>% 
-        withSpinner(type = 4, color = "#e6e6e6")
+      # uiOutput("render_cards"),
+      # uiOutput("render_highcharts") %>% 
+      uiOutput("render_main_timeseries") %>% 
+        withSpinner(type = 4, color = "#727272")
     )
     
   )
