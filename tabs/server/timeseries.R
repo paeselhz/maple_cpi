@@ -448,10 +448,14 @@ output$select_province_map <-
     
     canada_map <-
       leaflet(options = leafletOptions(zoomControl = FALSE))  %>% 
-      addTiles() %>% 
+      # addTiles() %>% 
+      # addProviderTiles("Esri.WorldGrayCanvas") %>% 
+      addProviderTiles("CartoDB.Positron") %>%
       addPolygons(
         data = map_provinces_cpi, 
-        weight = 5, 
+        weight = 0.5, 
+        fillOpacity = 0.5,
+        smoothFactor = 0.25,
         col = ~color, 
         layerId = ~PRENAME,
         label = ~paste0(PRENAME, " - CPI: ", yoy, "%")
