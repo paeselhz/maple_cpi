@@ -99,8 +99,6 @@ timeseries <-
     ),
     column(
       width = 9,
-      # uiOutput("render_cards"),
-      # uiOutput("render_highcharts") %>% 
       uiOutput("render_main_timeseries") %>% 
         withSpinner(type = 4, color = "#727272")
     )

@@ -137,12 +137,53 @@ output$render_main_timeseries <-
           column(
             width = 12, 
             cpi %>% 
-              timeseries_main(date_range = date_range, ema = selected_ema_window)
+              timeseries_main(date_range = date_range, ema = selected_ema_window,
+                              selected_geography = "Canada", selected_group = "All-items",
+                              icon = "maple-leaf.png")
             
           )
         )
         
+      } else {
+        
+        fluidRow(
+          column(
+            width = 6,
+            style = "border-right: solid;",
+            cpi %>% 
+              timeseries_main(date_range = date_range, ema = selected_ema_window,
+                              selected_geography = "Canada", selected_group = "All-items",
+                              icon = "maple-leaf.png")
+          ),
+          column(
+            width = 6,
+            cpi %>% 
+              timeseries_main(date_range = date_range, ema = selected_ema_window,
+                              selected_geography = "Canada", selected_group = selected_group,
+                              icon = "maple-leaf.png")
+          )
+        )
+        
       }
+      
+    } else {
+      
+      fluidRow(
+        column(
+          width = 6,
+          style = "border-right: solid;",
+          cpi %>% 
+            timeseries_main(date_range = date_range, ema = selected_ema_window,
+                            selected_geography = "Canada", selected_group = selected_group,
+                            icon = "maple-leaf.png")
+        ),
+        column(
+          width = 6,
+          cpi %>% 
+            timeseries_main(date_range = date_range, ema = selected_ema_window,
+                            selected_geography = selected_geography, selected_group = selected_group)
+        )
+      )
       
     }
     
@@ -356,18 +397,7 @@ output$render_highcharts <-
         
       } else {
         
-        fluidRow(
-          column(
-            width = 6,
-            cpi %>% 
-              highchart_cpi_yoy_mom(date_range = date_range, "Canada", "All-items", ema = selected_ema_window)
-          ),
-          column(
-            width = 6,
-            cpi %>% 
-              highchart_cpi_yoy_mom(date_range = date_range, "Canada", selected_group, ema = selected_ema_window)
-          )
-        )
+        
         
       }
       
@@ -375,18 +405,7 @@ output$render_highcharts <-
       
     } else {
       
-      fluidRow(
-        column(
-          width = 6,
-          cpi %>% 
-            highchart_cpi_yoy_mom(date_range = date_range, "Canada", selected_group, ema = selected_ema_window)
-        ),
-        column(
-          width = 6,
-          cpi %>% 
-            highchart_cpi_yoy_mom(date_range = date_range, selected_geography, selected_group, ema = selected_ema_window)
-        )
-      )
+      
       
     }
     
