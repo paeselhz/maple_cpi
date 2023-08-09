@@ -139,8 +139,9 @@ output$render_cards <-
             card_info(
               text = "Latest CPI YoY%",
               value = latest_cpi_canada_all_items$yoy,
-              color = "#e6e6e6",
-              region = "Canada"
+              color = "#727272",
+              region = "Canada",
+              icon = "maple-leaf.png"
             )
           ),
           column(
@@ -149,8 +150,9 @@ output$render_cards <-
             card_info(
               text = "Latest CPI MoM%",
               value = latest_cpi_canada_all_items$mom,
-              color = "#e6e6e6",
-              region = "Canada"
+              color = "#727272",
+              region = "Canada",
+              icon = "maple-leaf.png"
             )
           )
         )        
@@ -178,8 +180,9 @@ output$render_cards <-
             card_info(
               text = paste0("Latest CPI YoY%"),
               value = latest_cpi_canada_user_input$yoy,
-              color = "#e6e6e6",
-              region = "Canada"
+              color = "#727272",
+              region = "Canada",
+              icon = "maple-leaf.png"
             )
           ),
           column(
@@ -188,8 +191,9 @@ output$render_cards <-
             card_info(
               text = paste0("Latest CPI MoM%"),
               value = latest_cpi_canada_user_input$mom,
-              color = "#e6e6e6",
-              region = "Canada"
+              color = "#727272",
+              region = "Canada",
+              icon = "maple-leaf.png"
             )
           ),
           column(
@@ -198,8 +202,9 @@ output$render_cards <-
             card_info(
               text = paste0("Latest CPI YoY% - ", selected_group),
               value = latest_cpi_user_input$yoy,
-              color = "#e6e6e6",
-              region = "Canada"
+              color = "#727272",
+              region = "Canada",
+              icon = "maple-leaf.png"
             )
           ),
           column(
@@ -208,8 +213,9 @@ output$render_cards <-
             card_info(
               text = paste0("Latest CPI MoM% - ", selected_group),
               value = latest_cpi_user_input$mom,
-              color = "#e6e6e6",
-              region = "Canada"
+              color = "#727272",
+              region = "Canada",
+              icon = "maple-leaf.png"
             )
           )
         )
@@ -239,8 +245,9 @@ output$render_cards <-
           card_info(
             text = paste0("Latest CPI YoY% - ", selected_group),
             value = latest_cpi_canada_user_input$yoy,
-            color = "#e6e6e6",
-            region = "Canada"
+            color = "#727272",
+            region = "Canada",
+            icon = "maple-leaf.png"
           )
         ),
         column(
@@ -249,8 +256,9 @@ output$render_cards <-
           card_info(
             text = paste0("Latest CPI MoM% - ", selected_group),
             value = latest_cpi_canada_user_input$mom,
-            color = "#e6e6e6",
-            region = "Canada"
+            color = "#727272",
+            region = "Canada",
+            icon = "maple-leaf.png"
           )
         ),
         column(
@@ -259,7 +267,7 @@ output$render_cards <-
           card_info(
             text = paste0("Latest CPI YoY% - ", selected_group),
             value = latest_cpi_user_input$yoy,
-            color = "#e6e6e6",
+            color = "#727272",
             region = selected_geography
           )
         ),
@@ -269,7 +277,7 @@ output$render_cards <-
           card_info(
             text = paste0("Latest CPI MoM% - ", selected_group),
             value = latest_cpi_user_input$mom,
-            color = "#e6e6e6",
+            color = "#727272",
             region = selected_geography
           )
         )

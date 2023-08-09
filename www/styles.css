@@ -93,7 +93,7 @@ element.style {
   line-height: 1.2em;
   letter-spacing: 1px;
   word-break: normal;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(172, 191, 188, 0.95);
   transition: font-weight .4s;
 }
 
@@ -115,4 +115,18 @@ element.style {
 .card-info:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a box-shadow effect on hover */
   transform: scale(1.05); /* Increase the size by 5% on hover (adjust the scale value as desired) */
+}
+
+/*card icon*/
+
+.icon_block_container{
+   float: left;
+}
+
+.icon_block_container img {
+   height: 20px;
+   position: absolute;
+   left: 10px;
+   bottom: 10px;
+   -webkit-filter: invert(100%);
 }

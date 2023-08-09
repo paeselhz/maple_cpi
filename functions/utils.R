@@ -23,14 +23,32 @@ maple_cpi_theme <-
   )
 
 card_info <-
-  function(text, value, region, color) {
+  function(text, value, region, color, icon = NA) {
+    
+    if(!is.na(icon)) {
+      
+      icon_html <-
+        paste0(
+          '<div class = "icon_block">
+            <div class = "icon_block_container">
+                <img src = "img/', icon, '">
+            </div>
+          </div>'
+        )
+      
+    } else {
+      
+      icon_html <- ""
+      
+    }
     
     shiny::HTML(
       paste0(
         '<div class = "card-info" style = "background-color:', color, ';">
             <span class = "name">', text, '</span>
-            <span class = "value">', value, '%</span>
-            <span class = "region">', region, '</span>
+            <span class = "value">', value, '%</span>',
+        icon_html, 
+        '<span class = "region">', region, '</span>
         </div>'
       )
     )
