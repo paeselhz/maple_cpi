@@ -21,18 +21,32 @@ highchart_cpi_yoy_mom <-
       )
     
     hc_return <-
-      df_filtered %>% 
-      hchart(
-        "line",
+      # df_filtered %>%
+      highchart() %>% 
+      # hc_yAxis_multiples(
+      #   list(title = list(text = "Rates %"), opposite = FALSE),
+      #   list(showLastLabel = FALSE, opposite = TRUE, title = list(text = "CPI raw value"))
+      # ) %>%
+      hc_add_series(
+        data = df_filtered,
+        type = "line",
         hcaes(x = ref_date, y = yoy),
-        name = "CPI Year-Over-Year"
+        name = "CPI Year-Over-Year",
+        yAxis = 0
       ) %>% 
       hc_add_series(
         data = df_filtered,
         type = "line",
         hcaes(x = ref_date, y = mom),
-        name = "CPI Month-Over-Month"
+        name = "CPI Month-Over-Month",
+        yAxis = 0
       ) %>% 
+      # hc_add_series(
+      #   data = df_filtered,
+      #   type = "line",
+      #   hcaes(x = ref_date, y = cpi_level),
+      #   yAxis = 1
+      # ) %>% 
       hc_tooltip(
         valueDecimals = 3,
         shared = TRUE
@@ -40,9 +54,9 @@ highchart_cpi_yoy_mom <-
       hc_xAxis(
         title = list(text = "Reference Date")
       ) %>% 
-      hc_yAxis(
-        title = list(text = "Rates %")
-      ) %>% 
+      # hc_yAxis(
+      #   title = list(text = "Rates %")
+      # ) %>% 
       hc_title(
         text = paste0(
           "CPI data for: ", selected_group, " - ", selected_geography

@@ -15,7 +15,8 @@ calculate_mom_yoy <-
       reframe(
         ref_date = ref_date,
         mom = round((value/lag(value) - 1) * 100, digits = 3),
-        yoy = round((value/lag(value, 12) - 1) * 100, digits = 3)
+        yoy = round((value/lag(value, 12) - 1) * 100, digits = 3),
+        cpi_level = value
       ) %>% 
       ungroup() %>% 
       filter(
