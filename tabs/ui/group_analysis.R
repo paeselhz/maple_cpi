@@ -38,7 +38,7 @@ group_analysis <-
           inputId = "group_analysis_date_range",
           label = "Select a date range",
           range = TRUE,
-          value = c(ymd(max(cpi$ref_date)) - years(5), max(cpi$ref_date)) + 1
+          value = c(ymd(max(cpi$ref_date)) - years(5), max(cpi$ref_date))
         )
       ),
       column(

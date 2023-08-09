@@ -29,6 +29,8 @@ observeEvent(input$group_analysis_manual_range, {
     
   }
   
+  print(date_ranges)
+  
   updateAirDateInput(
     session = session,
     inputId = "group_analysis_date_range",
