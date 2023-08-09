@@ -18,7 +18,7 @@ timeseries_main <-
           class = "column-cards",
           width = 6,
           card_info(
-            text = "Latest CPI YoY%",
+            text = paste0("Latest CPI YoY% - ", selected_group),
             value = cpi_calculated %>% filter(ref_date == max(ref_date)) %>% pull(yoy),
             color = "#727272",
             region = selected_geography,
@@ -29,7 +29,7 @@ timeseries_main <-
           class = "column-cards",
           width = 6,
           card_info(
-            text = "Latest CPI MoM%",
+            text = paste0("Latest CPI MoM% - ", selected_group),
             value = cpi_calculated %>% filter(ref_date == max(ref_date)) %>% pull(mom),
             color = "#727272",
             region = selected_geography,

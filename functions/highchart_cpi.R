@@ -22,14 +22,16 @@ highchart_cpi_yoy_mom <-
     
     hc_return <-
       # df_filtered %>%
-      highchart() %>% 
+      # highchart() %>% 
       # hc_yAxis_multiples(
       #   list(title = list(text = "Rates %"), opposite = FALSE),
       #   list(showLastLabel = FALSE, opposite = TRUE, title = list(text = "CPI raw value"))
       # ) %>%
-      hc_add_series(
-        data = df_filtered,
-        type = "line",
+      # hc_add_series(
+      df_filtered %>% 
+      hchart(
+        # data = df_filtered,
+        "line",
         hcaes(x = ref_date, y = yoy),
         name = "CPI Year-Over-Year",
         yAxis = 0
