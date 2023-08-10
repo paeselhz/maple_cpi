@@ -93,7 +93,7 @@ element.style {
   line-height: 1.2em;
   letter-spacing: 1px;
   word-break: normal;
-  color: rgba(172, 191, 188, 0.95);
+  color: #fff;
   transition: font-weight .4s;
 }
 
@@ -129,4 +129,20 @@ element.style {
    left: 10px;
    bottom: 10px;
    -webkit-filter: invert(100%);
+}
+
+/*custom button shinyWidgets*/
+
+.custom_actionBttn .bttn-primary{
+  background-color: #E87D6B;
+  border-color: #fff;
+  color: #fff;
+}
+
+.custom_actionBttn .bttn-unite.bttn-primary:before {
+    background: #e53622;
+}
+
+.bttn-unite.bttn-primary:after {
+    background: #E87D6B;
 }

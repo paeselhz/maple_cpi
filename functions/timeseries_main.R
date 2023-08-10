@@ -2,7 +2,8 @@
 timeseries_main <-
   function(
     df, date_range, ema = 0,
-    selected_geography = "Canada", selected_group = "All-items", icon = NA
+    selected_geography = "Canada", selected_group = "All-items", 
+    icon = NA, cards_color = "#727272"
   ) {
     
     cpi_calculated <-
@@ -20,7 +21,7 @@ timeseries_main <-
           card_info(
             text = paste0("Latest CPI YoY% - ", selected_group),
             value = cpi_calculated %>% filter(ref_date == max(ref_date)) %>% pull(yoy),
-            color = "#727272",
+            color = cards_color,
             region = selected_geography,
             icon = icon
           )
@@ -31,7 +32,7 @@ timeseries_main <-
           card_info(
             text = paste0("Latest CPI MoM% - ", selected_group),
             value = cpi_calculated %>% filter(ref_date == max(ref_date)) %>% pull(mom),
-            color = "#727272",
+            color = cards_color,
             region = selected_geography,
             icon = icon
           )

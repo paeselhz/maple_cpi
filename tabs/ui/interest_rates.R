@@ -20,7 +20,7 @@ interest_rates <-
             yes = tags$i(class = "fa fa-circle",
                          style = "color: steel-blue"),
             no = tags$i(class = "fa fa-circle-o",
-                         style = "color: steel-blue")
+                        style = "color: steel-blue")
           )
         )
       ),
@@ -35,9 +35,13 @@ interest_rates <-
       ),
       column(
         width = 1,
-        actionBttn(
-          inputId = "show_interest_rates_faq",
-          icon = icon("question-circle")
+        div(
+          class = "custom_actionBttn",
+          actionBttn(
+            inputId = "show_interest_rates_faq",
+            icon = icon("question-circle"),
+            color = "primary"
+          )
         )
       )
     ),

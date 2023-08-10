@@ -34,14 +34,16 @@ highchart_cpi_yoy_mom <-
         "line",
         hcaes(x = ref_date, y = yoy),
         name = "CPI Year-Over-Year",
-        yAxis = 0
+        yAxis = 0,
+        color = c("#E53622")
       ) %>% 
       hc_add_series(
         data = df_filtered,
         type = "line",
         hcaes(x = ref_date, y = mom),
         name = "CPI Month-Over-Month",
-        yAxis = 0
+        yAxis = 0,
+        color = c("#4F2824")
       ) %>% 
       # hc_add_series(
       #   data = df_filtered,

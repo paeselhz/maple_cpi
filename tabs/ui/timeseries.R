@@ -68,9 +68,13 @@ timeseries <-
         # ),
         # column(
         # width = 6,
-        actionBttn(
-          inputId = "show_timeseries_faq",
-          icon = icon("question-circle")
+        div(
+          class = "custom_actionBttn",
+          actionBttn(
+            inputId = "show_timeseries_faq",
+            icon = icon("question-circle"),
+            color = "primary"
+          )
         )
         # )
       )

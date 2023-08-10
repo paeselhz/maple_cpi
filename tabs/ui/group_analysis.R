@@ -43,9 +43,13 @@ group_analysis <-
       ),
       column(
         width = 1,
-        actionBttn(
-          inputId = "show_group_analysis_faq",
-          icon = icon("question-circle")
+        div(
+          class = "custom_actionBttn",
+          actionBttn(
+            inputId = "show_group_analysis_faq",
+            icon = icon("question-circle"),
+            color = "primary"
+          )
         )
       )
     ),

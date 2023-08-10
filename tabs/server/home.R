@@ -22,7 +22,7 @@ output$home_cards_economy <-
         card_info(
           text = "Canadian CPI - YoY%",
           value = latest_cpi_canada$yoy,
-          color = "#727272",
+          color = cards_color,
           region = ""
         )
       ),
@@ -32,7 +32,7 @@ output$home_cards_economy <-
         card_info(
           text = "Canadian CPI - MoM%",
           value = latest_cpi_canada$mom,
-          color = "#727272",
+          color = cards_color,
           region = ""
         )
       ),
@@ -42,7 +42,7 @@ output$home_cards_economy <-
         card_info(
           text = "Target Interest Rate",
           value = latest_boc_target_rate$overnight_target,
-          color = "#727272",
+          color = cards_color,
           region = ""
         )
       )

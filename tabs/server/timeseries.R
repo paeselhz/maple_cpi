@@ -139,7 +139,7 @@ output$render_main_timeseries <-
             cpi %>% 
               timeseries_main(date_range = date_range, ema = selected_ema_window,
                               selected_geography = "Canada", selected_group = "All-items",
-                              icon = "maple-leaf.png")
+                              icon = "maple-leaf.png", cards_color = cards_color)
             
           )
         )
@@ -153,14 +153,14 @@ output$render_main_timeseries <-
             cpi %>% 
               timeseries_main(date_range = date_range, ema = selected_ema_window,
                               selected_geography = "Canada", selected_group = "All-items",
-                              icon = "maple-leaf.png")
+                              icon = "maple-leaf.png", cards_color = cards_color)
           ),
           column(
             width = 6,
             cpi %>% 
               timeseries_main(date_range = date_range, ema = selected_ema_window,
                               selected_geography = "Canada", selected_group = selected_group,
-                              icon = "maple-leaf.png")
+                              icon = "maple-leaf.png", cards_color = cards_color)
           )
         )
         
@@ -175,13 +175,14 @@ output$render_main_timeseries <-
           cpi %>% 
             timeseries_main(date_range = date_range, ema = selected_ema_window,
                             selected_geography = "Canada", selected_group = selected_group,
-                            icon = "maple-leaf.png")
+                            icon = "maple-leaf.png", cards_color = cards_color)
         ),
         column(
           width = 6,
           cpi %>% 
             timeseries_main(date_range = date_range, ema = selected_ema_window,
-                            selected_geography = selected_geography, selected_group = selected_group)
+                            selected_geography = selected_geography, selected_group = selected_group,
+                            cards_color = cards_color)
         )
       )
       
