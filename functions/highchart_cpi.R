@@ -58,13 +58,18 @@ highchart_cpi_yoy_mom <-
       hc_xAxis(
         title = list(text = "Reference Date")
       ) %>% 
-      # hc_yAxis(
-      #   title = list(text = "Rates %")
-      # ) %>% 
+      hc_yAxis(
+        title = list(text = "Rates %")
+      ) %>%
       hc_title(
         text = paste0(
           "CPI data for: ", selected_group, " - ", selected_geography
         )
+      ) %>%
+      hc_legend(
+        enabled = TRUE,
+        align = "bottom",
+        layout = "horizontal"
       ) %>% 
       hc_exporting(
         enabled = TRUE
@@ -80,7 +85,8 @@ highchart_cpi_yoy_mom <-
           data = df_filtered,
           type = "line",
           hcaes(x = ref_date, y = ema),
-          name = paste0("YoY% Exp. Moving Average - ", ema, " Months")
+          name = paste0("YoY% Exp. Moving Average - ", ema, " Months"),
+          color = c("#009949")
         )
       
     } else {

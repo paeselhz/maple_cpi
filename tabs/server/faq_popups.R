@@ -1,14 +1,5 @@
 
 observeEvent(
-  input$button_major_cpi_groups, 
-  {
-    
-    major_groups_faq(session)
-    
-  })
-
-
-observeEvent(
   input$show_timeseries_faq, 
   {
     

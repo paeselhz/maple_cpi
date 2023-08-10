@@ -8,6 +8,13 @@ element.style {
     padding-top: 50px;
 }
 
+/*home body*/
+
+.home-ui-panel {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
 /*navbar*/
 
 .github-corner {
@@ -30,6 +37,8 @@ element.style {
 
 .home-text-box {
   text-align: justify;
+  background-color: #ead1c7;
+  line-height: 1.4;
 }
 
 /*.container-fluid {

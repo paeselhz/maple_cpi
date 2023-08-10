@@ -86,19 +86,22 @@ output$interest_rates_plot <-
         hchart(
          "line",
          hcaes(x = date, y = overnight_target),
-         name = "Target Rate %"
+         name = "Target Rate %",
+         color = c("#E53622")
         ) %>% 
         hc_add_series(
           data = filtered_df,
           type = "line",
           hcaes(x = date, y = bank_rate),
-          name = "Bank Rate %"
+          name = "Bank Rate %",
+          color = c("#4F2824")
         ) %>% 
         hc_add_series(
           data = filtered_df,
           type = "line",
           hcaes(x = date, y = corra),
-          name = "CORRA % - Canadian Overnight Repo Rate Average"
+          name = "CORRA % - Canadian Overnight Repo Rate Average",
+          color = c("#009949")
         ) %>% 
         hc_xAxis(
           title = list(text = "Reference Date")

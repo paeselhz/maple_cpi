@@ -1,4 +1,12 @@
 
+observeEvent(
+  input$button_major_cpi_groups, 
+  {
+    
+    updateTabsetPanel(session = session, inputId = "navbar", selected = "about")
+    
+  })
+
 output$home_cards_economy <-
   renderUI({
     

@@ -2,6 +2,7 @@ home <-
   tabPanel(
     title = "Home",
     value = "home",
+    class = "home-ui-panel",
     hr(),
     HTML('<h1 style="text-align:center"><strong>Maple CPI</strong> - Canadian CPI explorer</h1>'),
     fluidRow(
@@ -26,6 +27,8 @@ home <-
             grasp the information on their bills rising, while also being a tool 
             for advanced users to build analysis, develop charts and export 
             information related to the Canadian Consumer Price Index (CPI).",
+            "</h4>",
+            "<h4>",
             "The main focus of this project is to deliver clear insights that are
             easily understable, while maintaning the ability for more experienced
             users to explore underrated views related to the evolution of inflation
@@ -34,13 +37,17 @@ home <-
             shed some light on the economic intricacies that surround Canada.",
             "</h4>"
           )
+        ),
+        HTML(
+          paste0(
+            "<h4>",
+            'If you would like to know more about the concepts used in this application,
+            or you would like to know more about the <strong>Consumer Price Index</strong>,
+            more known as <strong>CPI</strong>, ',
+            shiny::actionLink(inputId = "button_major_cpi_groups", label = "click here"),"!",
+            "</h4>"
+          )
         )
       ) 
-    ),
-    fluidRow(
-      actionBttn(
-        inputId = "button_major_cpi_groups",
-        label = "CPI Major Groups"
-      )
     )
   )
