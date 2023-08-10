@@ -428,12 +428,12 @@ output$select_province_map <-
     if(selected_geography == "Canada") {
     
       color_vector <-
-        rep("#FF0000", 10)  
+        rep(cards_color, 10)  
       
     } else {
       
       color_vector <-
-        ifelse(map_provinces$PRENAME == selected_geography, "#FF0000", "#e6e6e6")
+        ifelse(map_provinces$PRENAME == selected_geography, cards_color, "#e6e6e6")
       
     }
     
@@ -455,7 +455,7 @@ output$select_province_map <-
       addPolygons(
         data = map_provinces_cpi, 
         weight = 0.5, 
-        fillOpacity = 0.5,
+        fillOpacity = 0.7,
         smoothFactor = 0.25,
         col = ~color, 
         layerId = ~PRENAME,

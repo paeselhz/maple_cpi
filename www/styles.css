@@ -8,6 +8,16 @@ element.style {
     padding-top: 50px;
 }
 
+/*links color*/
+
+a, a:hover{
+  color: #4F2824;
+}
+
+.about-link {
+  text-decoration: underline;
+}
+
 /*home body*/
 
 .home-ui-panel {
@@ -45,12 +55,6 @@ element.style {
   padding-right: 0;
   padding-left: 0;
 }*/
-
-/*button styling*/
-
-.btn-group-justified>.btn, .btn-group-justified>.btn-group {
-  padding: 1%;
-}
 
 /*cards info*/
 
@@ -140,6 +144,12 @@ element.style {
    -webkit-filter: invert(100%);
 }
 
+/*button styling*/
+
+.btn-group-justified>.btn, .btn-group-justified>.btn-group {
+  padding: 1%;
+}
+
 /*custom button shinyWidgets*/
 
 .custom_actionBttn .bttn-primary{
@@ -154,4 +164,11 @@ element.style {
 
 .bttn-unite.bttn-primary:after {
     background: #E87D6B;
+}
+
+/*custom checkbox shinywidgets*/
+
+.checkbox-primary input[type="checkbox"]:checked+label::before, .checkbox-primary input[type="radio"]:checked+label::before {
+    background-color: #E87D6B;
+    border-color: #E87D6B;
 }

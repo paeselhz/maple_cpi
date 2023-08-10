@@ -44,7 +44,7 @@ home <-
             'If you would like to know more about the concepts used in this application,
             or you would like to know more about the <strong>Consumer Price Index</strong>,
             more known as <strong>CPI</strong>, ',
-            shiny::actionLink(inputId = "button_major_cpi_groups", label = "click here"),"!",
+            shiny::actionLink(class = "about-link", inputId = "button_major_cpi_groups", label = "click here"),"!",
             "</h4>"
           )
         )
