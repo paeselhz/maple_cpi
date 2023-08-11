@@ -7,10 +7,29 @@ about_page <-
     h1("About Maple CPI"),
     fluidRow(
       column(
-        width = 12,
+        width = 9,
         class = "about-text-box",
         HTML(
           paste0(
+            "<h4>",
+            "As described by <em>Statistics Canada</em>, the <strong>Consumer 
+            Price Index (CPI)</strong> represents changes in prices as 
+            experienced by Canadian consumers. It measures price change by 
+            comparing, through time, the cost of a fixed basket of goods and services,
+            and it is widely used as an indicator of the change in the general 
+            level of consumer prices or the rate of inflation. For more detailed
+            information, visit ",
+            '<a class="about-link" target="_blank" href="https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2301&lang=en&db=imdb&adm=8&dis=2">Statistics Canada</a>',
+            '.',
+            "</h4>",
+            "<h4>",
+            'The target population of the <strong>CPI</strong> consists of families and individuals 
+            living in urban and rural private households in Canada, while people 
+            living in collective households, such as members of communal colonies, 
+            prison inmates, and chronic care patients in hospitals and nursing 
+            homes are excluded from the target population.',
+            "</h4>",
+            "<hr>",
             "<h4>",
             "Thourghout the application, the acronym <strong>YoY</strong> is used 
             to refer to comparisons on a <strong>Year-over-Year</strong> basis, 
@@ -19,10 +38,13 @@ about_page <-
             "</h4>",
             "<hr>",
             "<h4>",
-            'While not a perfect measure, the <strong>CPI (Consumer Price Index)</strong>
-          captures the average shopping experience of Canadians. Each item in the 
-          basket is given a "weight," which depends on how much a typical household 
-          spends on that item. The basket includes:',
+            'While not a perfect measure, the <strong>CPI</strong>
+          captures the average shopping experience of Canadians. The CPI basket weights 
+          are normally updated on an annual basis, and the data to derive the weights 
+          is obtained primarily from Household Final Consumption Expenditure (HFCE) 
+          series, and supplemented by data from the Survey of Household Spending (SHS).
+          Each item in the basket is given a "weight," which depends on how much a 
+          typical household spends on that item. The basket includes:',
             "<br>",
             "<ul>",
             "<li><strong>Food:</strong> Groceries and restaurant meals,</li>",
@@ -37,6 +59,23 @@ about_page <-
             "</ul>",
             "</h4>"
           )
+        )
+      ),
+      column(
+        width = 3,
+        class = 'about-dev-box',
+        HTML(
+          "<h3>About the developer</h3>",
+          '<img src="https://avatars.githubusercontent.com/u/25777539?v=4" width = "80%">',
+          "<br>",
+          "<h4>",
+          "Hi there,",
+          "<br>",
+          "I'm a Machine Learning Engineer, and in my free time, I dabble in
+          data analytics, exploring subjects that are of my interest. Most of
+          my publications can be found on my ",
+          '<a class="about-link" href="https://paeselhz.github.io" target="_blank">blog</a>.',
+          "</h4>"
         )
       )
     )

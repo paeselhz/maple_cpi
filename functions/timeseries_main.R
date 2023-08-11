@@ -12,6 +12,11 @@ timeseries_main <-
         !is.na(yoy)
       )
     
+    selected_group <-
+      ifelse(stringr::str_length(selected_group) > 20,
+             paste0(stringr::str_sub(selected_group, 1, 20), "..."),
+             selected_group)
+    
     column(
       width = 12,
       fluidRow(

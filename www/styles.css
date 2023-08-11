@@ -50,6 +50,16 @@ a, a:hover{
   background-color: #ead1c7;
 }
 
+.about-text-box {
+  text-align: justify;
+}
+
+.about-dev-box {
+  text-align: justify;
+  border-radius: 10px;
+  background-color: #ead1c7;
+}
+
 .home-text-box > h4 {
   line-height: 1.4;
 }
