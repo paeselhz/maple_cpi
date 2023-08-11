@@ -1,40 +1,4 @@
 
-major_groups_faq <-
-  function(session) {
-    
-    major_groups_faq_text <-
-      HTML(
-        paste0(
-          'While not a perfect measure, the <strong>CPI (Consumer Price Index)</strong>
-          captures the average shopping experience of Canadians. Each item in the 
-          basket is given a "weight," which depends on how much a typical household 
-          spends on that item. The basket includes:',
-          "<ul>",
-          "<li>Food: Groceries and restaurant meals,</li>",
-          "<li>Shelter: Rent and mortgage costs, insurance, repairs and maintenance, taxes, utilities,</li>",
-          "<li>Transportation: Vehicles, gasoline, car insurance, repairs and maintenance, public transit costs,</li>",
-          "<li>Household expenses: Phones, internet, child care, cleaning supplies,</li>",
-          "<li>Furniture and appliances,</li>",
-          "<li>Apparel: Clothing, footwear, jewellery, dry cleaning,</li>",
-          "<li>Medical and personal care: Prescriptions, dental care, eye care, haircuts, toiletries,</li>",
-          "<li>Sports, travel, education and leisure,</li>",
-          "<li>Alcohol, tobacco and recreational cannabis,</li>",
-          "</ul>"
-        )
-      )
-    
-    sendSweetAlert(
-      session = session,
-      title = "CPI Major Groups",
-      text = major_groups_faq_text,
-      type = "question",
-      html = TRUE,
-      width = "50em"
-    )
-    
-  }
-
-
 timeseries_faq <-
   function(session) {
     

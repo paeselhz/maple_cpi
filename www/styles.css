@@ -48,6 +48,13 @@ a, a:hover{
 .home-text-box {
   text-align: justify;
   background-color: #ead1c7;
+}
+
+.home-text-box > h4 {
+  line-height: 1.4;
+}
+
+.about-text-box > h4 {
   line-height: 1.4;
 }
 
