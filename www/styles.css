@@ -60,12 +60,24 @@ a, a:hover{
   background-color: #ead1c7;
 }
 
+.about-dev-box > h4 {
+  line-height: 1.4;
+}
+
 .home-text-box > h4 {
   line-height: 1.4;
 }
 
 .about-text-box > h4 {
   line-height: 1.4;
+}
+
+.image-about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 /*.container-fluid {

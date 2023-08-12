@@ -66,14 +66,15 @@ about_page <-
         class = 'about-dev-box',
         HTML(
           "<h3>About the developer</h3>",
-          '<img src="https://avatars.githubusercontent.com/u/25777539?v=4" width = "80%">',
-          "<br>",
+          '<div class="image-about">',
+            '<img src="https://avatars.githubusercontent.com/u/25777539?v=4" width = "80%">',
+          "</div>",
           "<h4>",
           "Hi there,",
-          "<br>",
-          "I'm a Machine Learning Engineer, and in my free time, I dabble in
-          data analytics, exploring subjects that are of my interest. Most of
-          my publications can be found on my ",
+          "<br><br>",
+          "I'm a Machine Learning Engineer, and in my free time, I use data analytics
+          to explore subjects of my interest, like the state of the economy, immigration
+          and general data science projects. Most of my publications can be found on my ",
           '<a class="about-link" href="https://paeselhz.github.io" target="_blank">blog</a>.',
           "</h4>"
         )

@@ -64,7 +64,9 @@ interest_rates_faq <-
       HTML(
         paste0(
           "This tab displays daily information related to decisions from Bank
-          of Canada about the <strong>target interest rate</strong>, the
+          of Canada about the <strong>policy rate</strong> (the primary tool used 
+          to control inflation, the policy rate is the starting point for setting many 
+          of the interest rates in the economy that matter for Canadians), the
           <strong>bank rate</strong> and the Canadian Overnight Repo Rate Average,
           known as <strong>CORRA</strong>, which measures the cost of overnight 
           general collateral funding in Canadian dollars using Government of 
