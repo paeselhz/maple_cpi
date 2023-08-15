@@ -2,7 +2,7 @@ library(dplyr)
 
 boc_rates <-
   readr::read_csv(
-    'data/raw/10100139-eng/10100139.csv'
+    'data/raw/10100139.csv'
   ) %>% 
   janitor::clean_names() %>% 
   filter(
@@ -38,7 +38,7 @@ readr::write_rds(
 
 cpi <-
   readr::read_csv(
-    'data/raw/18100004-eng/18100004.csv'
+    'data/raw/18100004.csv'
   ) %>% 
   janitor::clean_names() %>% 
   filter(
