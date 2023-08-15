@@ -86,7 +86,7 @@ output$interest_rates_plot <-
         hchart(
          "line",
          hcaes(x = date, y = overnight_target),
-         name = "Target Rate %",
+         name = "Policy Rate %",
          color = c("#E53622")
         ) %>% 
         hc_add_series(
