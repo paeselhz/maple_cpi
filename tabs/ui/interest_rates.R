@@ -17,10 +17,8 @@ interest_rates <-
           individual = TRUE,
           justified = TRUE,
           checkIcon = list(
-            yes = tags$i(class = "fa fa-circle",
-                         style = "color: steel-blue"),
-            no = tags$i(class = "fa fa-circle-o",
-                        style = "color: steel-blue")
+            yes = tags$i(class = "fa fa-circle"),
+            no = tags$i(class = "fa fa-circle-o")
           )
         )
       ),
@@ -47,6 +45,6 @@ interest_rates <-
     ),
     fluidRow(
       highchartOutput("interest_rates_plot") %>% 
-        withSpinner(type = 4, color = "#e6e6e6")
+        withSpinner(type = 4, color = cards_color)
     )
   )

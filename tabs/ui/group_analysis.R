@@ -25,10 +25,8 @@ group_analysis <-
           individual = TRUE,
           justified = TRUE,
           checkIcon = list(
-            yes = tags$i(class = "fa fa-circle",
-                         style = "color: steel-blue"),
-            no = tags$i(class = "fa fa-circle-o",
-                        style = "color: steel-blue")
+            yes = tags$i(class = "fa fa-circle"),
+            no = tags$i(class = "fa fa-circle-o")
           )
         )
       ),
@@ -61,13 +59,13 @@ group_analysis <-
             title = "CPI Decomposition",
             value = "cpi_decomposition",
             highchartOutput("cpi_groups", height = "600px") %>% 
-              withSpinner(type = 4, color = "#e6e6e6")
+              withSpinner(type = 4, color = cards_color)
           ),
           tabPanel(
             title = "CPI Shares",
             value = "cpi_shares",
             highchartOutput("cpi_shares", height = "600px") %>% 
-              withSpinner(type = 4, color = "#e6e6e6")
+              withSpinner(type = 4, color = cards_color)
           )
         )
       )

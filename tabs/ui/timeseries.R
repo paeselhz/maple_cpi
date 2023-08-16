@@ -41,10 +41,8 @@ timeseries <-
           individual = TRUE,
           justified = TRUE,
           checkIcon = list(
-            yes = tags$i(class = "fa fa-circle",
-                         style = "color: steel-blue"),
-            no = tags$i(class = "fa fa-circle-o",
-                        style = "color: steel-blue")
+            yes = tags$i(class = "fa fa-circle"),
+            no = tags$i(class = "fa fa-circle-o")
           )
         )
       ),
@@ -99,12 +97,12 @@ timeseries <-
         multiple = FALSE
       ),
       leafletOutput("select_province_map") %>% 
-        withSpinner(type = 4, color = "#727272")
+        withSpinner(type = 4, color = cards_color)
     ),
     column(
       width = 9,
       uiOutput("render_main_timeseries") %>% 
-        withSpinner(type = 4, color = "#727272")
+        withSpinner(type = 4, color = cards_color)
     )
     
   )
