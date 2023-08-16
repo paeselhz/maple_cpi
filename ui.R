@@ -3,7 +3,11 @@ shinyUI(
     tags$head(
       tags$link(rel = "shortcut icon", href = "img/maple-leaf.ico"),
       includeHTML('www/ga.html'),
-      includeHTML('www/metadata.html')
+      includeHTML('www/metadata.html'),
+      tags$script(
+        src = "https://kit.fontawesome.com/c85b63c8cc.js",
+        crossorigin = "anonymous"
+      )
     ),
     gh_corner("https://github.com/paeselhz/maple_cpi"),
     tags$style(
