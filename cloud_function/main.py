@@ -30,7 +30,7 @@ def maple_cpi_data_proc(cloud_event):
 
     logging.info("Downloaded BOC Rates data and prepared dataframe")
 
-    boc_rates.to_sql('boc_rates', schema = 'maple_cpi', engine, if_exists = "replace", index = False)
+    boc_rates.to_sql('boc_rates', engine, schema = 'maple_cpi', if_exists = "replace", index = False)
 
     logging.info("Uploaded BoC Rates to Hydra Database")
     logging.warning("End of Process!")
