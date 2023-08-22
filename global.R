@@ -47,15 +47,6 @@ major_groups <-
 
 icon_groups <-
   c(
-    # "glyphicon-asterisk",
-    # "glyphicon-cutlery",
-    # "glyphicon-wrench",
-    # "glyphicon-home",
-    # "glyphicon-sunglasses",
-    # "glyphicon-plane",
-    # "glyphicon-heart",
-    # "glyphicon-book",
-    # "glyphicon-glass"
     "fa-solid fa-asterisk",
     "fa-solid fa-utensils",
     "fa-solid fa-house",

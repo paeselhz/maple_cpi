@@ -4,8 +4,6 @@ WORKDIR /srv/shiny-server/
 
 COPY . /srv/shiny-server/
 
-COPY templates/shiny-server.conf /etc/shiny-server/shiny-server.conf
-
 RUN apt-get update \
   && apt-get install -y \
       libglpk-dev \
