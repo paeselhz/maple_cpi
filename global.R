@@ -1,4 +1,6 @@
 library(sf)
+library(DBI)
+library(RPostgres)
 library(dplyr)
 library(shiny)
 library(leaflet)
@@ -60,18 +62,45 @@ icon_groups <-
 
 ## loading data ----
 
-boc_rates <-
-  readr::read_rds(
-    'data/boc_rates.rds'
+postgres_con <-
+  DBI::dbConnect(
+    RPostgres::Postgres(),
+    dbname = "d31345z86227",
+    host = Sys.getenv("POSTGRES_HOST"),
+    port = 5432,
+    user = Sys.getenv("POSTGRES_USER"),
+    password = Sys.getenv("POSTGRES_PASSWORD"),
+    sslmode = "require"
   )
 
-cpi <-
-  readr::read_rds(
-    'data/cpi_transformed.rds'
+boc_rates <-
+  tbl(postgres_con, dbplyr::in_schema("maple_cpi", "boc_rates")) %>% 
+  rename(
+    date = ref_date
   ) %>% 
-  filter(
-    ref_date >= as.Date("2001-01-01")
+  collect() %>% 
+  mutate(
+    date = as.Date(date)
   )
+  # readr::read_rds(
+  #   'data/boc_rates.rds'
+  # )
+
+cpi <-
+  tbl(postgres_con, dbplyr::in_schema("maple_cpi", "cpi")) %>% 
+  filter(
+    ref_date >= "2001-01-01"
+  ) %>% 
+  collect() %>% 
+  mutate(
+    ref_date = as.Date(ref_date)
+  )
+  # readr::read_rds(
+  #   'data/cpi_transformed.rds'
+  # ) %>% 
+  # filter(
+  #   ref_date >= as.Date("2001-01-01")
+  # )
 
 basket_weights <-
   readr::read_rds(

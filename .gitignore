@@ -8,3 +8,5 @@
 data/raw/
 
 shiny_bookmarks/
+
+.Renviron
