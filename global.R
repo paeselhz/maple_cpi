@@ -65,7 +65,7 @@ icon_groups <-
 postgres_con <-
   DBI::dbConnect(
     RPostgres::Postgres(),
-    dbname = "d31345z86227",
+    dbname = Sys.getenv("POSTGRES_DB"),
     host = Sys.getenv("POSTGRES_HOST"),
     port = 5432,
     user = Sys.getenv("POSTGRES_USER"),
