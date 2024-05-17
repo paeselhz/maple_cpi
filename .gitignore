@@ -11,8 +11,6 @@ shiny_bookmarks/
 
 .Renviron
 
-docs/
-
 maple_cpi/
 
 __pycache__/
