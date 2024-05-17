@@ -1,0 +1,6 @@
+pandas
+faicons
+requests
+fastparquet
+shiny
+
