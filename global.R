@@ -16,6 +16,7 @@ source('functions/highchart_cpi.R')
 source('functions/timeseries_main.R')
 source('functions/sweet_alert_faqs.R')
 source('functions/calculate_mom_yoy.R')
+source('functions/utils_bank_of_canada.R')
 
 ## creating lists used by app ----
 
@@ -127,8 +128,17 @@ map_provinces <-
   readr::read_rds('data/map_provinces.rds') %>% 
   filter(
     PRENAME %in% geographical_locations
+  )
+  # sf::st_transform(crs = 4702)
+
+## new data -- government bonds ----
+
+gvt_bonds <-
+  readr::read_csv(
+    "https://www.bankofcanada.ca/valet/observations/group/bond_yields_all/csv",
+    skip = 27
   ) %>% 
-  sf::st_transform(crs = 4702)
+  janitor::clean_names()
 
 ## general app config ----
 
