@@ -3,4 +3,3 @@ faicons
 requests
 fastparquet
 shiny
-

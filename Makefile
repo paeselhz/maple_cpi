@@ -17,11 +17,11 @@ data_extraction:
 
 .PHONY: run
 run:
-	shiny run app.py
+	shiny run shiny/app.py
 
 .PHONY: build_shinylive
 build_shinylive:
-	shinylive export . docs
+	shinylive export shiny_app docs
 	python3 -m http.server --directory docs --bind localhost 8080
 
 .PHONY: clean

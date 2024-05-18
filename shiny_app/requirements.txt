@@ -1,0 +1,6 @@
+pandas
+faicons
+requests
+fastparquet
+shiny==0.9.0
+
