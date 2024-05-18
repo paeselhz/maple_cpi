@@ -1,10 +1,23 @@
+from pathlib import Path
 import fastparquet
 from faicons import icon_svg
 from shiny import App, reactive, render, ui
 from tabs.data import *
 from tabs.ui.about import about_panel
 
-app_ui = ui.page_navbar(about_panel)
+app_ui = ui.page_fluid(
+    ui.tags.style(
+        "@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');"
+    ),
+    ui.head_content(ui.include_css(Path(__file__).parent / "www/styles.css")),
+    ui.page_navbar(
+
+    about_panel, 
+    
+    title = "Maple CPI", 
+    id="navbar"
+    )
+)
 
 
 def server(input, output, session):

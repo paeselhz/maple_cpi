@@ -58,6 +58,7 @@ about_panel = ui.nav_panel(
             </ul>
             </h4>"""
             ),
+            class_ = "about-text-box"
         ),
         ui.column(
             3,
@@ -77,6 +78,7 @@ about_panel = ui.nav_panel(
           <a class="about-link" href="https://paeselhz.github.io" target="_blank">blog</a>.
           </h4>"""
             ),
+            class_="about-dev-box"
         ),
     ),
     value="about",
