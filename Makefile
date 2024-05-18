@@ -17,7 +17,7 @@ data_extraction:
 
 .PHONY: run
 run:
-	shiny run shiny/app.py
+	shiny run shiny_app/app.py
 
 .PHONY: build_shinylive
 build_shinylive:
