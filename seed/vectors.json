@@ -1,0 +1,619 @@
+{
+  "generatedAt": "2026-07-12T01:56:02.683Z",
+  "cpi": [
+    {
+      "geo": "Canada",
+      "group": "All-items",
+      "coordinate": "2.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41690973
+    },
+    {
+      "geo": "Canada",
+      "group": "Food",
+      "coordinate": "2.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41690974
+    },
+    {
+      "geo": "Canada",
+      "group": "Shelter",
+      "coordinate": "2.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41691050
+    },
+    {
+      "geo": "Canada",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "2.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41691067
+    },
+    {
+      "geo": "Canada",
+      "group": "Clothing and footwear",
+      "coordinate": "2.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41691108
+    },
+    {
+      "geo": "Canada",
+      "group": "Transportation",
+      "coordinate": "2.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41691128
+    },
+    {
+      "geo": "Canada",
+      "group": "Health and personal care",
+      "coordinate": "2.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41691153
+    },
+    {
+      "geo": "Canada",
+      "group": "Recreation, education and reading",
+      "coordinate": "2.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41691170
+    },
+    {
+      "geo": "Canada",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "2.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41691206
+    },
+    {
+      "geo": "Newfoundland and Labrador",
+      "group": "All-items",
+      "coordinate": "3.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41691244
+    },
+    {
+      "geo": "Newfoundland and Labrador",
+      "group": "Food",
+      "coordinate": "3.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41691245
+    },
+    {
+      "geo": "Newfoundland and Labrador",
+      "group": "Shelter",
+      "coordinate": "3.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41691277
+    },
+    {
+      "geo": "Newfoundland and Labrador",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "3.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41691289
+    },
+    {
+      "geo": "Newfoundland and Labrador",
+      "group": "Clothing and footwear",
+      "coordinate": "3.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41691304
+    },
+    {
+      "geo": "Newfoundland and Labrador",
+      "group": "Transportation",
+      "coordinate": "3.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41691312
+    },
+    {
+      "geo": "Newfoundland and Labrador",
+      "group": "Health and personal care",
+      "coordinate": "3.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41691328
+    },
+    {
+      "geo": "Newfoundland and Labrador",
+      "group": "Recreation, education and reading",
+      "coordinate": "3.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41691338
+    },
+    {
+      "geo": "Newfoundland and Labrador",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "3.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41691351
+    },
+    {
+      "geo": "Prince Edward Island",
+      "group": "All-items",
+      "coordinate": "5.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41691379
+    },
+    {
+      "geo": "Prince Edward Island",
+      "group": "Food",
+      "coordinate": "5.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41691380
+    },
+    {
+      "geo": "Prince Edward Island",
+      "group": "Shelter",
+      "coordinate": "5.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41691412
+    },
+    {
+      "geo": "Prince Edward Island",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "5.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41691424
+    },
+    {
+      "geo": "Prince Edward Island",
+      "group": "Clothing and footwear",
+      "coordinate": "5.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41691439
+    },
+    {
+      "geo": "Prince Edward Island",
+      "group": "Transportation",
+      "coordinate": "5.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41691447
+    },
+    {
+      "geo": "Prince Edward Island",
+      "group": "Health and personal care",
+      "coordinate": "5.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41691462
+    },
+    {
+      "geo": "Prince Edward Island",
+      "group": "Recreation, education and reading",
+      "coordinate": "5.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41691472
+    },
+    {
+      "geo": "Prince Edward Island",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "5.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41691485
+    },
+    {
+      "geo": "Nova Scotia",
+      "group": "All-items",
+      "coordinate": "7.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41691513
+    },
+    {
+      "geo": "Nova Scotia",
+      "group": "Food",
+      "coordinate": "7.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41691514
+    },
+    {
+      "geo": "Nova Scotia",
+      "group": "Shelter",
+      "coordinate": "7.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41691546
+    },
+    {
+      "geo": "Nova Scotia",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "7.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41691558
+    },
+    {
+      "geo": "Nova Scotia",
+      "group": "Clothing and footwear",
+      "coordinate": "7.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41691573
+    },
+    {
+      "geo": "Nova Scotia",
+      "group": "Transportation",
+      "coordinate": "7.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41691581
+    },
+    {
+      "geo": "Nova Scotia",
+      "group": "Health and personal care",
+      "coordinate": "7.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41691597
+    },
+    {
+      "geo": "Nova Scotia",
+      "group": "Recreation, education and reading",
+      "coordinate": "7.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41691607
+    },
+    {
+      "geo": "Nova Scotia",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "7.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41691620
+    },
+    {
+      "geo": "New Brunswick",
+      "group": "All-items",
+      "coordinate": "9.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41691648
+    },
+    {
+      "geo": "New Brunswick",
+      "group": "Food",
+      "coordinate": "9.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41691649
+    },
+    {
+      "geo": "New Brunswick",
+      "group": "Shelter",
+      "coordinate": "9.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41691681
+    },
+    {
+      "geo": "New Brunswick",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "9.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41691693
+    },
+    {
+      "geo": "New Brunswick",
+      "group": "Clothing and footwear",
+      "coordinate": "9.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41691708
+    },
+    {
+      "geo": "New Brunswick",
+      "group": "Transportation",
+      "coordinate": "9.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41691716
+    },
+    {
+      "geo": "New Brunswick",
+      "group": "Health and personal care",
+      "coordinate": "9.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41691732
+    },
+    {
+      "geo": "New Brunswick",
+      "group": "Recreation, education and reading",
+      "coordinate": "9.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41691742
+    },
+    {
+      "geo": "New Brunswick",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "9.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41691755
+    },
+    {
+      "geo": "Quebec",
+      "group": "All-items",
+      "coordinate": "11.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41691783
+    },
+    {
+      "geo": "Quebec",
+      "group": "Food",
+      "coordinate": "11.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41691784
+    },
+    {
+      "geo": "Quebec",
+      "group": "Shelter",
+      "coordinate": "11.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41691816
+    },
+    {
+      "geo": "Quebec",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "11.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41691829
+    },
+    {
+      "geo": "Quebec",
+      "group": "Clothing and footwear",
+      "coordinate": "11.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41691844
+    },
+    {
+      "geo": "Quebec",
+      "group": "Transportation",
+      "coordinate": "11.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41691852
+    },
+    {
+      "geo": "Quebec",
+      "group": "Health and personal care",
+      "coordinate": "11.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41691868
+    },
+    {
+      "geo": "Quebec",
+      "group": "Recreation, education and reading",
+      "coordinate": "11.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41691878
+    },
+    {
+      "geo": "Quebec",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "11.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41691891
+    },
+    {
+      "geo": "Ontario",
+      "group": "All-items",
+      "coordinate": "14.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41691919
+    },
+    {
+      "geo": "Ontario",
+      "group": "Food",
+      "coordinate": "14.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41691920
+    },
+    {
+      "geo": "Ontario",
+      "group": "Shelter",
+      "coordinate": "14.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41691952
+    },
+    {
+      "geo": "Ontario",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "14.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41691965
+    },
+    {
+      "geo": "Ontario",
+      "group": "Clothing and footwear",
+      "coordinate": "14.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41691980
+    },
+    {
+      "geo": "Ontario",
+      "group": "Transportation",
+      "coordinate": "14.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41691988
+    },
+    {
+      "geo": "Ontario",
+      "group": "Health and personal care",
+      "coordinate": "14.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41692004
+    },
+    {
+      "geo": "Ontario",
+      "group": "Recreation, education and reading",
+      "coordinate": "14.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41692014
+    },
+    {
+      "geo": "Ontario",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "14.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41692027
+    },
+    {
+      "geo": "Manitoba",
+      "group": "All-items",
+      "coordinate": "18.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41692055
+    },
+    {
+      "geo": "Manitoba",
+      "group": "Food",
+      "coordinate": "18.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41692056
+    },
+    {
+      "geo": "Manitoba",
+      "group": "Shelter",
+      "coordinate": "18.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41692088
+    },
+    {
+      "geo": "Manitoba",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "18.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41692101
+    },
+    {
+      "geo": "Manitoba",
+      "group": "Clothing and footwear",
+      "coordinate": "18.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41692116
+    },
+    {
+      "geo": "Manitoba",
+      "group": "Transportation",
+      "coordinate": "18.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41692124
+    },
+    {
+      "geo": "Manitoba",
+      "group": "Health and personal care",
+      "coordinate": "18.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41692140
+    },
+    {
+      "geo": "Manitoba",
+      "group": "Recreation, education and reading",
+      "coordinate": "18.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41692150
+    },
+    {
+      "geo": "Manitoba",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "18.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41692163
+    },
+    {
+      "geo": "Saskatchewan",
+      "group": "All-items",
+      "coordinate": "20.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41692191
+    },
+    {
+      "geo": "Saskatchewan",
+      "group": "Food",
+      "coordinate": "20.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41692192
+    },
+    {
+      "geo": "Saskatchewan",
+      "group": "Shelter",
+      "coordinate": "20.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41692224
+    },
+    {
+      "geo": "Saskatchewan",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "20.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41692237
+    },
+    {
+      "geo": "Saskatchewan",
+      "group": "Clothing and footwear",
+      "coordinate": "20.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41692252
+    },
+    {
+      "geo": "Saskatchewan",
+      "group": "Transportation",
+      "coordinate": "20.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41692260
+    },
+    {
+      "geo": "Saskatchewan",
+      "group": "Health and personal care",
+      "coordinate": "20.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41692276
+    },
+    {
+      "geo": "Saskatchewan",
+      "group": "Recreation, education and reading",
+      "coordinate": "20.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41692286
+    },
+    {
+      "geo": "Saskatchewan",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "20.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41692299
+    },
+    {
+      "geo": "Alberta",
+      "group": "All-items",
+      "coordinate": "23.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41692327
+    },
+    {
+      "geo": "Alberta",
+      "group": "Food",
+      "coordinate": "23.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41692328
+    },
+    {
+      "geo": "Alberta",
+      "group": "Shelter",
+      "coordinate": "23.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41692360
+    },
+    {
+      "geo": "Alberta",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "23.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41692372
+    },
+    {
+      "geo": "Alberta",
+      "group": "Clothing and footwear",
+      "coordinate": "23.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41692387
+    },
+    {
+      "geo": "Alberta",
+      "group": "Transportation",
+      "coordinate": "23.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41692395
+    },
+    {
+      "geo": "Alberta",
+      "group": "Health and personal care",
+      "coordinate": "23.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41692411
+    },
+    {
+      "geo": "Alberta",
+      "group": "Recreation, education and reading",
+      "coordinate": "23.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41692421
+    },
+    {
+      "geo": "Alberta",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "23.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41692434
+    },
+    {
+      "geo": "British Columbia",
+      "group": "All-items",
+      "coordinate": "26.2.0.0.0.0.0.0.0.0",
+      "vectorId": 41692462
+    },
+    {
+      "geo": "British Columbia",
+      "group": "Food",
+      "coordinate": "26.3.0.0.0.0.0.0.0.0",
+      "vectorId": 41692463
+    },
+    {
+      "geo": "British Columbia",
+      "group": "Shelter",
+      "coordinate": "26.79.0.0.0.0.0.0.0.0",
+      "vectorId": 41692495
+    },
+    {
+      "geo": "British Columbia",
+      "group": "Household operations, furnishings and equipment",
+      "coordinate": "26.96.0.0.0.0.0.0.0.0",
+      "vectorId": 41692508
+    },
+    {
+      "geo": "British Columbia",
+      "group": "Clothing and footwear",
+      "coordinate": "26.139.0.0.0.0.0.0.0.0",
+      "vectorId": 41692523
+    },
+    {
+      "geo": "British Columbia",
+      "group": "Transportation",
+      "coordinate": "26.176.0.0.0.0.0.0.0.0",
+      "vectorId": 41692531
+    },
+    {
+      "geo": "British Columbia",
+      "group": "Health and personal care",
+      "coordinate": "26.201.0.0.0.0.0.0.0.0",
+      "vectorId": 41692547
+    },
+    {
+      "geo": "British Columbia",
+      "group": "Recreation, education and reading",
+      "coordinate": "26.219.0.0.0.0.0.0.0.0",
+      "vectorId": 41692557
+    },
+    {
+      "geo": "British Columbia",
+      "group": "Alcoholic beverages, tobacco products and recreational cannabis",
+      "coordinate": "26.256.0.0.0.0.0.0.0.0",
+      "vectorId": 41692570
+    }
+  ],
+  "rates": [
+    {
+      "geo": "Canada",
+      "group": "Target rate",
+      "coordinate": "1.39.0.0.0.0.0.0.0.0",
+      "vectorId": 39079
+    },
+    {
+      "geo": "Canada",
+      "group": "Bank rate",
+      "coordinate": "1.38.0.0.0.0.0.0.0.0",
+      "vectorId": 39078
+    },
+    {
+      "geo": "Canada",
+      "group": "Overnight money market financing",
+      "coordinate": "1.35.0.0.0.0.0.0.0.0",
+      "vectorId": 39075
+    }
+  ]
+}

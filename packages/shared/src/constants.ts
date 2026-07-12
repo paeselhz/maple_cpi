@@ -98,3 +98,31 @@ export const RATE_SERIES: Record<string, 'overnight_target' | 'bank_rate' | 'cor
 /** History floors carried from the original app. */
 export const CPI_HISTORY_FLOOR = '2001-01-01';
 export const RATES_HISTORY_FLOOR = '2002-01-01';
+
+/** CPI basket weights product table (separate from the CPI index table). */
+export const WDS_PID_WEIGHTS = 18100007;
+
+/**
+ * Basket-weight vintage → CPI-effective validity window (inclusive), keyed by the
+ * vintage's reference year. Rows 1996–2022 are the authoritative windows the
+ * original app shipped (data/basket_weights_timewindow.rds); 2023–2025 extend
+ * them following StatCan's annual-update schedule (each vintage effective in May
+ * of ref-year+1 through April of ref-year+2; the 2025 basket effective May 2026
+ * matches StatCan's May-2026 basket update). The current vintage is open-ended.
+ */
+export const WEIGHT_WINDOWS: Record<number, { start_month: string; end_month: string }> = {
+  1996: { start_month: '1997-12-01', end_month: '2002-11-01' },
+  2001: { start_month: '2002-12-01', end_month: '2007-03-01' },
+  2005: { start_month: '2007-04-01', end_month: '2011-03-01' },
+  2009: { start_month: '2011-04-01', end_month: '2012-12-01' },
+  2011: { start_month: '2013-01-01', end_month: '2014-11-01' },
+  2013: { start_month: '2014-12-01', end_month: '2016-11-01' },
+  2015: { start_month: '2016-12-01', end_month: '2018-12-01' },
+  2017: { start_month: '2019-01-01', end_month: '2021-06-01' },
+  2020: { start_month: '2021-07-01', end_month: '2022-04-01' },
+  2021: { start_month: '2022-05-01', end_month: '2023-04-01' },
+  2022: { start_month: '2023-05-01', end_month: '2024-04-01' },
+  2023: { start_month: '2024-05-01', end_month: '2025-04-01' },
+  2024: { start_month: '2025-05-01', end_month: '2026-04-01' },
+  2025: { start_month: '2026-05-01', end_month: '2099-12-01' },
+};
