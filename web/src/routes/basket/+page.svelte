@@ -45,7 +45,8 @@
     const c = plotColors();
     return {
       height: 320,
-      marginLeft: 150,
+      marginLeft: 162,
+      marginRight: 48,
       x: { label: `${metric.toUpperCase()} contribution (pp)`, grid: true },
       y: { label: null },
       marks: [
