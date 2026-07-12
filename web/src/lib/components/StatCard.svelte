@@ -37,10 +37,11 @@
     gap: 8px;
   }
   .label {
-    font-size: 13px;
+    font-family: var(--font-mono);
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
   }
   .ico {
     color: var(--accent);
@@ -49,8 +50,9 @@
     text-align: center;
   }
   .value {
-    font-size: 28px;
-    font-weight: 700;
+    font-family: var(--font-sans);
+    font-size: 30px;
+    font-weight: 800;
     letter-spacing: -0.02em;
     display: flex;
     align-items: baseline;
@@ -59,6 +61,7 @@
   .big .value {
     font-size: clamp(48px, 9vw, 84px);
     line-height: 1;
+    letter-spacing: -0.04em;
   }
   .glyph {
     font-size: 0.6em;

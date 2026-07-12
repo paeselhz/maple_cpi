@@ -2,12 +2,11 @@
   import * as Plot from '@observablehq/plot';
   import Chart from '$lib/plot/Chart.svelte';
   import Explainer from '$lib/components/Explainer.svelte';
+  import ContributionBars from '$lib/components/ContributionBars.svelte';
   import { plotColors } from '$lib/plot/theme';
   import { theme } from '$lib/theme.svelte';
-  import { formatMonth, formatPct, formatPctPlain, direction } from '$lib/format';
-  import { shortGroup } from '$lib/util';
+  import { formatMonth, formatPctPlain, direction } from '$lib/format';
   import { strings } from '$lib/strings';
-  import { GROUP_ICONS, type ProductGroup } from '@maple-cpi/shared';
   import type { PageData } from './$types';
 
   let { data }: Props = $props();
@@ -15,48 +14,67 @@
     data: PageData;
   }
 
-  const yoy = $derived(data.latest?.yoy ?? null);
-  const mom = $derived(data.latest?.mom ?? null);
+  const latest = $derived(data.latest);
+  const yoy = $derived(latest?.yoy ?? null);
+  const mom = $derived(latest?.mom ?? null);
   const dir = $derived(direction(yoy));
-  const gloss = $derived(
-    yoy == null
-      ? ''
-      : `Prices across Canada are ${dir.label === 'down' ? 'down' : 'up'} ${formatPctPlain(Math.abs(yoy))} over the past year — measured in ${formatMonth(data.latest!.ref_date)}.`,
-  );
-  const topThree = $derived(data.latestContribs.slice(0, 3));
 
-  function sparkSpec(width: number): Plot.PlotOptions {
-    const c = plotColors();
-    return {
-      height: 90,
-      marginLeft: 30,
-      marginTop: 8,
-      x: { type: 'utc', ticks: 4, label: null },
-      y: { ticks: 3, label: null, tickFormat: (d: number) => d + '%' },
-      marks: [
-        Plot.ruleY([0], { stroke: c.border }),
-        Plot.areaY(data.spark, {
-          x: (d) => new Date(d.ref_date),
-          y: 'yoy',
-          fill: c.accent,
-          fillOpacity: 0.12,
-        }),
-        Plot.lineY(data.spark, { x: (d) => new Date(d.ref_date), y: 'yoy', stroke: c.accent, strokeWidth: 2 }),
-        Plot.dot(data.spark.slice(-1), { x: (d) => new Date(d.ref_date), y: 'yoy', fill: c.accent, r: 3.5 }),
-      ],
-    };
-  }
+  // Integer + fractional split so the big number can render "2" large and ".1%" smaller.
+  const bigNum = $derived(yoy == null ? '–' : Math.abs(yoy).toFixed(1));
+
+  // Acceleration vs. deceleration — the pill's meaning (NOT good/bad). Compare with a year ago.
+  const yoyYearAgo = $derived(data.spark.length >= 13 ? (data.spark.at(-13)?.yoy ?? null) : null);
+  const easing = $derived(yoy != null && yoyYearAgo != null ? yoy < yoyYearAgo : null);
+
+  const headline = $derived.by(() => {
+    if (yoy == null) return 'Canadian inflation, at a glance.';
+    const upDown = dir.label === 'down' ? 'down' : 'up';
+    if (easing == null) return `Prices are ${upDown} over the last year.`;
+    return easing
+      ? `Prices are ${upDown} over the last year — but the pace is cooling.`
+      : `Prices are ${upDown} over the last year — and the pace is quickening.`;
+  });
+
+  const gloss = $derived.by(() => {
+    if (yoy == null) return '';
+    const target = 2;
+    const vsTarget =
+      yoy <= target + 0.3
+        ? "back within sight of the Bank of Canada's 2% target"
+        : `still above the Bank of Canada's ${target}% target`;
+    if (yoyYearAgo == null) return `Measured in ${formatMonth(latest!.ref_date)} — ${vsTarget}.`;
+    const move = yoy < yoyYearAgo ? 'down' : 'up';
+    return `That's ${move} from ${formatPctPlain(yoyYearAgo)} a year ago — ${vsTarget}.`;
+  });
+
+  // Ranked "who's driving it" — top contributors by magnitude.
+  const drivers = $derived(data.latestContribs.slice(0, 5));
 
   function rateSpec(width: number): Plot.PlotOptions {
     const c = plotColors();
     const rows = data.rateSpark.filter((r) => r.overnight_target != null);
     return {
       height: 150,
+      marginLeft: 40,
       x: { type: 'utc', label: null },
       y: { label: '%', grid: true },
       marks: [
-        Plot.lineY(rows, { x: (d) => new Date(d.ref_date), y: 'overnight_target', stroke: c.series[0], strokeWidth: 2, curve: 'step-after' }),
-        Plot.tip(rows, Plot.pointerX({ x: (d) => new Date(d.ref_date), y: 'overnight_target', title: (d) => `${d.ref_date}\nPolicy rate: ${d.overnight_target}%` })),
+        Plot.lineY(rows, {
+          x: (d) => new Date(d.ref_date),
+          y: 'overnight_target',
+          stroke: c.series[1],
+          strokeWidth: 2.5,
+          curve: 'step-after',
+        }),
+        Plot.dot(rows.slice(-1), { x: (d) => new Date(d.ref_date), y: 'overnight_target', fill: c.accent, r: 4 }),
+        Plot.tip(
+          rows,
+          Plot.pointerX({
+            x: (d) => new Date(d.ref_date),
+            y: 'overnight_target',
+            title: (d) => `${d.ref_date}\nPolicy rate: ${d.overnight_target}%`,
+          }),
+        ),
       ],
     };
   }
@@ -64,174 +82,198 @@
 
 <svelte:head>
   <title>Maple CPI — Canadian inflation right now</title>
-  <meta name="description" content="Canada's Consumer Price Index at a glance: headline inflation, what's driving it, and the Bank of Canada's response." />
+  <meta
+    name="description"
+    content="Canada's Consumer Price Index at a glance: headline inflation, what's driving it, and the Bank of Canada's response."
+  />
 </svelte:head>
 
 <section class="hero fade-in">
-  <p class="eyebrow">Canadian inflation · {data.latestDate ? formatMonth(data.latestDate) : ''}</p>
-  <div class="headline">
-    <div>
-      <div class="big tnum" class:up={dir.label === 'up'}>
-        <span class="glyph" aria-hidden="true">{dir.glyph}</span>{formatPct(yoy)}
-      </div>
-      <p class="over"><Explainer term="year-over-year" text={strings.glossary.yoy} /></p>
+  <h1 class="lede">{headline}</h1>
+  <div class="figure">
+    <div class="big tnum" aria-label="{formatPctPlain(yoy)} year over year">
+      {bigNum}<span class="pct">%</span>
     </div>
-    <div class="spark card">
-      <span class="muted tiny">Headline CPI, last 5 years</span>
-      <Chart build={sparkSpec} height={90} revision={theme.revision} ariaLabel="Headline CPI year-over-year, last five years" />
+    <div class="tag">
+      {#if easing != null}
+        <span class="pill" class:easing class:accelerating={!easing}>
+          <span aria-hidden="true">{easing ? '▼' : '▲'}</span>
+          {easing ? 'easing' : 'accelerating'}
+        </span>
+      {/if}
+      <span class="eyebrow">All-items YoY · {latest ? formatMonth(latest.ref_date) : ''}</span>
     </div>
   </div>
-  <p class="gloss">{gloss} Month over month, prices moved {formatPct(mom)}.</p>
+  <p class="gloss">
+    {gloss}
+    <Explainer term="What is CPI?" text={strings.glossary.cpi} />
+  </p>
+  {#if mom != null}
+    <p class="mom muted">Month over month, prices moved {formatPctPlain(mom)}.</p>
+  {/if}
 </section>
 
 <section class="drivers">
-  <h2>What's driving it</h2>
-  <p class="muted">Top contributors to the {formatPctPlain(yoy)} headline, by
-    <Explainer term="contribution" text={strings.glossary.contribution} />.</p>
-  <div class="chips">
-    {#each topThree as c (c.product_group)}
-      <div class="chip card">
-        <span class="ci"><i class={GROUP_ICONS[c.product_group as ProductGroup]}></i></span>
-        <div>
-          <div class="cg">{shortGroup(c.product_group)}</div>
-          <div class="cv tnum">{formatPct(c.contribution, 2)} <span class="muted tiny">of headline</span></div>
-        </div>
-      </div>
-    {/each}
+  <h2>Here's who's driving it</h2>
+  <p class="caption">Each group's contribution to the {formatPctPlain(yoy)} headline, ranked.</p>
+  <div class="barswrap">
+    <ContributionBars items={drivers} />
   </div>
+  <p class="caption note">Filled = pushing prices up · outline = pulling down.</p>
   <a class="more" href="/basket">See the whole basket →</a>
 </section>
 
 <section class="rate">
-  <div class="card">
-    <div class="rhead">
-      <div>
-        <h2>The Bank of Canada's response</h2>
-        <p class="muted tiny">Overnight policy rate</p>
-      </div>
+  <div class="rhead">
+    <div class="rlead">
+      <h2>What the Bank is doing</h2>
+      <p class="caption">
+        Overnight <Explainer term="policy rate" text={strings.glossary.policyRate} />.
+      </p>
       {#if data.latestRate}
-        <div class="rnow tnum">{formatPctPlain(data.latestRate.overnight_target)}</div>
+        <div class="rnow tnum">
+          {formatPctPlain(data.latestRate.overnight_target).replace('%', '')}<span class="pct">%</span>
+        </div>
       {/if}
     </div>
-    <Chart build={rateSpec} height={150} revision={theme.revision} ariaLabel="Bank of Canada overnight policy rate" />
-    <a class="more" href="/rates">Rates &amp; bond yields →</a>
+    <div class="rchart">
+      <Chart
+        build={rateSpec}
+        height={150}
+        revision={theme.revision}
+        ariaLabel="Bank of Canada overnight policy rate"
+      />
+    </div>
   </div>
+  <a class="more" href="/rates">Rates &amp; bond yields →</a>
 </section>
 
 <style>
+  /* ---- Hero ---- */
   .hero {
-    margin: 10px 0 40px;
+    margin: 18px 0 44px;
+    max-width: 760px;
   }
-  .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--muted);
-    margin: 0 0 6px;
+  .lede {
+    font-size: clamp(24px, 4.2vw, 34px);
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0 0 26px;
+    max-width: 20ch;
   }
-  .headline {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    align-items: center;
-  }
-  .big {
-    font-size: clamp(56px, 12vw, 110px);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
+  .figure {
     display: flex;
     align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
   }
-  .big .glyph {
-    font-size: 0.45em;
-    color: var(--muted);
-    margin-right: 6px;
+  .big {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: clamp(72px, 15vw, 128px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
   }
-  .big.up .glyph {
-    color: var(--accent);
+  .big .pct {
+    font-size: 0.5em;
+    font-weight: 800;
   }
-  .over {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 4px 0 0;
-  }
-  .spark {
-    padding: 14px 16px;
-  }
-  .tiny {
-    font-size: 12px;
+  .tag {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    align-items: flex-start;
   }
   .gloss {
-    font-size: 20px;
-    max-width: 60ch;
+    font-family: var(--font-serif);
+    font-size: clamp(17px, 2.4vw, 19px);
+    line-height: 1.6;
+    color: var(--maroon);
     margin: 22px 0 0;
-    line-height: 1.4;
+    max-width: 62ch;
   }
-  .drivers {
-    margin: 40px 0;
+  :root:not([data-theme='dark']) .gloss {
+    color: #4a423d;
   }
-  .drivers h2,
-  .rate h2 {
+  .mom {
+    font-size: 14px;
+    margin: 10px 0 0;
+  }
+
+  /* ---- Section shared ---- */
+  h2 {
+    font-size: clamp(20px, 3vw, 24px);
+    font-weight: 500;
     margin: 0 0 4px;
-    font-size: 22px;
   }
-  .chips {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin: 16px 0;
-  }
-  .chip {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px;
-  }
-  .ci {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: var(--accent-soft);
-    color: var(--accent);
-    display: grid;
-    place-items: center;
-    font-size: 17px;
-    flex: none;
-  }
-  .cg {
-    font-weight: 700;
+  .caption {
+    font-family: var(--font-serif);
+    font-style: italic;
     font-size: 15px;
+    color: var(--muted);
+    margin: 0 0 22px;
   }
-  .cv {
-    font-size: 15px;
-    font-weight: 600;
+  .caption.note {
+    color: var(--faint);
+    margin: 16px 0 0;
+    font-size: 13px;
   }
   .more {
+    display: inline-block;
     font-weight: 600;
     font-size: 14px;
+    margin-top: 18px;
+  }
+
+  /* ---- Drivers (ranked contribution bars) ---- */
+  .drivers {
+    margin: 44px 0;
+    padding-top: 34px;
+    border-top: 1px solid var(--border);
+  }
+  .barswrap {
+    max-width: 760px;
+  }
+
+  /* ---- Rate ---- */
+  .rate {
+    margin: 44px 0 0;
+    padding-top: 34px;
+    border-top: 1px solid var(--border);
   }
   .rhead {
     display: flex;
-    justify-content: space-between;
+    gap: 44px;
     align-items: flex-start;
-    margin-bottom: 8px;
+  }
+  .rlead {
+    flex: none;
+    width: 250px;
+  }
+  .rchart {
+    flex: 1;
+    min-width: 0;
   }
   .rnow {
-    font-size: 32px;
+    font-family: var(--font-sans);
     font-weight: 800;
-    color: var(--accent);
+    font-size: 52px;
+    line-height: 1;
+    margin-top: 14px;
+    color: var(--ink);
   }
+  .rnow .pct {
+    font-size: 0.5em;
+  }
+
   @media (max-width: 700px) {
-    .headline {
-      grid-template-columns: 1fr;
+    .rhead {
+      flex-direction: column;
+      gap: 20px;
     }
-    .chips {
-      grid-template-columns: 1fr;
-    }
-    .gloss {
-      font-size: 18px;
+    .rlead {
+      width: 100%;
     }
   }
 </style>

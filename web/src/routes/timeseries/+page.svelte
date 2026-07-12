@@ -2,12 +2,12 @@
   import * as Plot from '@observablehq/plot';
   import Chart from '$lib/plot/Chart.svelte';
   import SegmentedControl from '$lib/components/SegmentedControl.svelte';
-  import GeoMap from '$lib/components/GeoMap.svelte';
+  import ToggleSwitch from '$lib/components/ToggleSwitch.svelte';
   import Explainer from '$lib/components/Explainer.svelte';
   import { plotColors } from '$lib/plot/theme';
   import { crosshairMarks } from '$lib/plot/crosshair';
   import { theme } from '$lib/theme.svelte';
-  import { formatMonthShort, formatPctPlain } from '$lib/format';
+  import { formatMonth, formatMonthShort, formatPctPlain } from '$lib/format';
   import { shortGroup, windowStart } from '$lib/util';
   import { strings, DATE_WINDOWS } from '$lib/strings';
   import { downloadCsv, downloadPng } from '$lib/export';
@@ -79,9 +79,9 @@
     const c = plotColors();
     const seriesNames = [...new Set(plotRows.map((r) => r.series))];
     return {
-      height: 380,
+      height: 360,
       x: { type: 'utc', label: null },
-      y: { label: `${metric.toUpperCase()} %`, grid: true, tickFormat: (d: number) => d + '%' },
+      y: { label: null, grid: true, tickFormat: (d: number) => d + '%' },
       color: { domain: seriesNames, range: c.series, legend: seriesNames.length > 1 },
       marks: [
         Plot.ruleY([0], { stroke: c.border }),
@@ -98,23 +98,57 @@
     };
   }
 
-  const geoOptions = $derived(data.avail.geos.filter((g) => g !== 'Canada'));
+  // Region list (5a: a tidy ranked list, not the map). All-items YoY per geo,
+  // Canada pinned on top, provinces ranked hottest-first.
+  const regions = $derived.by(() => {
+    const provinces = data.avail.geos
+      .filter((g) => g !== 'Canada')
+      .map((g) => ({ geo: g, yoy: data.mapValues[g] ?? null }))
+      .sort((a, b) => (b.yoy ?? -99) - (a.yoy ?? -99));
+    return [{ geo: 'Canada', yoy: data.mapValues['Canada'] ?? initialLatest() }, ...provinces];
+  });
+  function initialLatest(): number | null {
+    return data.initialSeries.at(-1)?.yoy ?? null;
+  }
+
+  const windowLabel = $derived(DATE_WINDOWS.find((w) => w.years === windowYears)?.label ?? '');
+
+  // Data-driven one-line insight for the chart (honest, not a canned trend claim).
+  const mainPts = $derived(seriesByGeo[`${geo}|${group}|${emaWin}`] ?? []);
+  const val = (p: MomYoyPoint) => (metric === 'yoy' ? p.yoy : p.mom);
+  const inWinPts = $derived(mainPts.filter((p) => (!from || p.ref_date >= from) && val(p) != null));
+  const insight = $derived.by(() => {
+    const last = inWinPts.at(-1);
+    const first = inWinPts[0];
+    if (!last || !first) return '';
+    const lv = val(last)!;
+    const fv = val(first)!;
+    const diff = lv - fv;
+    const dirw = Math.abs(diff) < 0.1 ? 'about the same as' : diff < 0 ? 'down from' : 'up from';
+    const anchor = windowLabel === 'All' ? 'at the start of the record' : `at the start of this ${windowLabel} window`;
+    return `Now at ${formatPctPlain(lv)}, ${dirw} ${formatPctPlain(fv)} ${anchor}.`;
+  });
+  const nowPt = $derived(inWinPts.at(-1));
 
   function exportCsv() {
     downloadCsv(`maple-cpi-${geo}-${group}-${metric}.csv`, plotRows);
   }
 </script>
 
-<svelte:head><title>Explore — Maple CPI</title></svelte:head>
+<svelte:head><title>Time series — Maple CPI</title></svelte:head>
 
-<h1>Explore the numbers</h1>
-<p class="muted sub">
-  <Explainer term={metric === 'yoy' ? 'Year-over-year' : 'Month-over-month'} text={metric === 'yoy' ? strings.glossary.yoy : strings.glossary.mom} />
-  change for any group, nationally or by province.
-</p>
+<div class="page-header">
+  <p class="page-kicker">Time series</p>
+  <h1>Explore the numbers</h1>
+  <p class="lead">
+    <Explainer term={metric === 'yoy' ? 'Year-over-year' : 'Month-over-month'} text={metric === 'yoy' ? strings.glossary.yoy : strings.glossary.mom} />
+    change for any group, nationally or by province.
+  </p>
+</div>
 
-<div class="controls card">
-  <label>Group
+<div class="controls">
+  <label class="ctl">
+    <span class="clab">Group</span>
     <select bind:value={group}>
       {#each data.avail.groups as g (g)}<option value={g}>{shortGroup(g)}</option>{/each}
     </select>
@@ -138,143 +172,223 @@
     />
   </div>
   <label class="check"><input type="checkbox" bind:checked={ema} /> 3-month trend line</label>
-  {#if geo !== 'Canada'}
-    <label class="check"><input type="checkbox" bind:checked={compare} /> Compare to Canada</label>
-  {/if}
 </div>
 
 <div class="grid">
-  <div class="mapcol card">
-    <div class="maphd">
-      <strong>Geography</strong>
-      <button class="natl" class:active={geo === 'Canada'} onclick={() => (geo = 'Canada')}>🍁 Canada</button>
+  <div class="regioncol">
+    <div class="clab">Region</div>
+    <div class="regions">
+      {#each regions as r (r.geo)}
+        <button class="region" class:active={geo === r.geo} onclick={() => (geo = r.geo)}>
+          <span class="rname">{r.geo === 'Canada' ? '🍁 Canada' : r.geo}</span>
+          <span class="ryoy tnum">{formatPctPlain(r.yoy)}</span>
+        </button>
+      {/each}
     </div>
-    <GeoMap values={data.mapValues} selected={geo} onSelect={(g) => (geo = g)} width={300} />
-    <select class="geolist" bind:value={geo} aria-label="Select geography">
-      <option value="Canada">Canada (national)</option>
-      {#each geoOptions as g (g)}<option value={g}>{g} · {formatPctPlain(data.mapValues[g])}</option>{/each}
-    </select>
+    {#if geo !== 'Canada'}
+      <div class="compare">
+        <ToggleSwitch checked={compare} onChange={(v) => (compare = v)} label="Compare to Canada" />
+      </div>
+    {/if}
   </div>
 
-  <div class="chartcol card">
+  <div class="chartcard">
     <div class="charthd">
-      <div>
-        <strong>{shortGroup(group)}</strong>
-        <span class="muted"> · {geo}{geo !== 'Canada' && compare ? ' vs Canada' : ''}</span>
-      </div>
+      <h2 class="ctitle">
+        {shortGroup(group)}<span class="sub"> · {geo}{geo !== 'Canada' && compare ? ' vs Canada' : ''} · {metric === 'yoy' ? 'year-over-year' : 'month-over-month'}</span>
+      </h2>
       <div class="exports">
-        {#if loading}<span class="muted tiny">loading…</span>{/if}
+        {#if loading}<span class="caption load">loading…</span>{/if}
         <button onclick={exportCsv}>CSV</button>
         <button onclick={() => chartEl && downloadPng(chartEl, `maple-cpi-${geo}-${group}.png`)}>PNG</button>
       </div>
     </div>
+    {#if insight}<p class="insight">{insight}</p>{/if}
     <div bind:this={chartEl}>
-      <Chart build={spec} height={380} revision={theme.revision} ariaLabel="{metric} time series for {group}" />
+      <Chart build={spec} height={360} revision={theme.revision} ariaLabel="{metric} time series for {group}" />
+    </div>
+    <div class="chartfoot">
+      <span class="mono axislabel">↑ {metric.toUpperCase()} %</span>
+      {#if nowPt}<span class="mono now">● now: {formatPctPlain(val(nowPt))} ({formatMonth(nowPt.ref_date)})</span>{/if}
     </div>
   </div>
 </div>
 
 <style>
-  h1 {
-    margin: 0 0 2px;
-  }
-  .sub {
-    margin: 0 0 18px;
-  }
+  /* ---- Controls on paper (not boxed) ---- */
   .controls {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 16px;
+    align-items: flex-end;
+    gap: 30px;
+    margin-bottom: 26px;
   }
   .ctl {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
   }
   .clab {
-    font-size: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
     font-weight: 600;
-    color: var(--muted);
+    color: var(--faint);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted);
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    letter-spacing: 0.06em;
   }
   select {
-    font: inherit;
-    padding: 8px 10px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 9px 14px;
     border-radius: 8px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-strong);
     background: var(--surface);
     color: var(--ink);
-    min-height: 38px;
+    min-height: 40px;
+    min-width: 210px;
   }
   .check {
-    flex-direction: row;
+    display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 9px;
     color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 500;
+    padding-bottom: 9px;
+    cursor: pointer;
   }
+
+  /* ---- Region list + chart ---- */
   .grid {
     display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 16px;
+    grid-template-columns: 210px 1fr;
+    gap: 24px;
     align-items: start;
   }
-  .maphd,
-  .charthd {
+  .regioncol .clab {
+    margin-bottom: 10px;
+  }
+  .regions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 420px;
+    overflow-y: auto;
+  }
+  .region {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-  }
-  .natl {
-    border: 1px solid var(--border);
-    background: var(--surface-2);
+    gap: 12px;
+    padding: 10px 13px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
     color: var(--ink);
-    border-radius: 999px;
-    padding: 5px 12px;
-    font-weight: 600;
-    font-size: 13px;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 500;
     cursor: pointer;
+    text-align: left;
   }
-  .natl.active {
+  .region .ryoy {
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .region:hover {
+    border-color: var(--faint);
+  }
+  .region.active {
+    background: var(--accent);
     border-color: var(--accent);
-    color: var(--accent);
+    color: var(--paper);
+    font-weight: 600;
   }
-  .geolist {
-    width: 100%;
-    margin-top: 10px;
+  .region.active .ryoy {
+    color: var(--paper);
+  }
+  .compare {
+    margin-top: 14px;
+  }
+
+  .chartcard {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 26px 20px;
+  }
+  .charthd {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .ctitle {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .ctitle .sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .insight {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 6px 0 16px;
+    max-width: 62ch;
   }
   .exports {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex: none;
   }
   .exports button {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--ink);
-    border-radius: 8px;
-    padding: 5px 12px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface-2);
+    color: var(--muted);
+    border-radius: 7px;
+    padding: 6px 12px;
+    font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
   }
-  .tiny {
+  .exports button:hover {
+    color: var(--ink);
+  }
+  .load {
     font-size: 12px;
+  }
+  .chartfoot {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .chartfoot .now {
+    color: var(--accent);
   }
   @media (max-width: 800px) {
     .grid {
       grid-template-columns: 1fr;
+    }
+    .regions {
+      max-height: none;
     }
   }
 </style>

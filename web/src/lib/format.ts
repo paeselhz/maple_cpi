@@ -28,6 +28,15 @@ export function formatDay(iso: string): string {
   return dayFmt.format(new Date(iso + 'T00:00:00Z'));
 }
 
+/** Percentage-point contribution with an up/down glyph and a true minus sign.
+    e.g. 0.9 → "↑ +0.9pp", -0.2 → "↓ −0.2pp". Direction shown by glyph, not color. */
+export function formatPP(v: number | null | undefined, d = 1): string {
+  if (v === null || v === undefined || Number.isNaN(v)) return '–';
+  const glyph = v > 0.05 ? '↑ ' : v < -0.05 ? '↓ ' : '';
+  const sign = v > 0 ? '+' : v < 0 ? '−' : '';
+  return `${glyph}${sign}${Math.abs(v).toFixed(d)}pp`;
+}
+
 /** Direction glyph + accessible label — never rely on color alone. */
 export function direction(v: number | null | undefined): { glyph: string; label: string } {
   if (v === null || v === undefined || Number.isNaN(v)) return { glyph: '', label: '' };

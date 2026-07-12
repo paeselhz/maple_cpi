@@ -1,18 +1,23 @@
 /* Maple CPI — global tokens. "Warm ledger" palette (DESIGN.md §2, Direction A),
-   theme-aware. Semantic guardrail: inflation up ≠ red-bad, down ≠ green-good;
-   direction is shown with glyph + label, never color alone. */
+   theme-aware. Three-voice type system (settled design, turn 4):
+   Newsreader (serif) = voice · Libre Franklin (sans) = data/UI · IBM Plex Mono = numbers.
+   Semantic guardrail: inflation up ≠ red-bad, down ≠ green-good; direction is
+   carried by glyph + label + sign, never by color alone. */
 
 :root {
   --accent: #e4572e;
   --accent-soft: #f4c9bc;
+  --wash: #f1e7e1; /* bar troughs, subtle fills */
   --maroon: #4f2824;
   --green: #0a8754;
   --ink: #1c1a19;
   --paper: #fbf7f4;
   --surface: #ffffff;
-  --surface-2: #f4eee9;
+  --surface-2: #f3ece7;
   --muted: #8a817c;
-  --border: #e7ded7;
+  --faint: #b8a79e; /* lightest captions, axis whispers */
+  --border: #eadfd6;
+  --border-strong: #e6d9d1;
   --shadow: 0 1px 2px rgba(28, 26, 25, 0.06), 0 4px 16px rgba(28, 26, 25, 0.05);
 
   --series-1: #e4572e;
@@ -21,27 +26,32 @@
   --series-4: #2e6fa3;
   --series-5: #c58a1a;
 
-  --font-sans: 'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Libre Franklin', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --radius: 14px;
   --maxw: 1120px;
 }
 
 :root[data-theme='dark'] {
-  --accent: #ff6b43;
+  --accent: #f2795a;
   --accent-soft: #4a2a20;
-  --maroon: #d9a79f;
-  --green: #38c98d;
-  --ink: #f2ece7;
-  --paper: #1a1614;
+  --wash: #352923;
+  --maroon: #c9bcb2;
+  --green: #5fcf9b;
+  --ink: #f5ede6;
+  --paper: #1e1917;
   --surface: #241e1b;
-  --surface-2: #2e2622;
-  --muted: #a89e97;
-  --border: #3a302b;
+  --surface-2: #181312;
+  --muted: #a2958c;
+  --faint: #6a5a51;
+  --border: #352923;
+  --border-strong: #352923;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
 
-  --series-1: #ff6b43;
-  --series-2: #d9a79f;
-  --series-3: #38c98d;
+  --series-1: #f2795a;
+  --series-2: #c9bcb2;
+  --series-3: #5fcf9b;
   --series-4: #6aa8d8;
   --series-5: #e0b24a;
 }
@@ -61,11 +71,91 @@ body {
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: 'tnum' 1, 'cv01' 1;
+  font-feature-settings: 'tnum' 1;
 }
 
+/* The serif voice — headlines, section titles, prose that speaks to a person. */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.serif {
+  font-family: var(--font-serif);
+}
+.mono {
+  font-family: var(--font-mono);
+}
 .tnum {
   font-variant-numeric: tabular-nums;
+}
+
+/* Mono eyebrow — the "ledger label" used above/below data. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* Page kicker — the accent mono label that opens every deep page (5a–5d). */
+.page-kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 16px;
+}
+
+/* Editorial page header block: kicker → serif title → serif lead, on paper. */
+.page-header {
+  max-width: 920px;
+  margin: 6px 0 30px;
+}
+.page-header h1 {
+  font-size: clamp(28px, 4.4vw, 34px);
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+.page-header .lead {
+  margin: 0;
+}
+
+/* The serif italic "caption" voice — secondary lines under a heading. */
+.caption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* Page-level lead paragraph — the serif voice, one register below a headline. */
+.lead {
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 2.2vw, 20px);
+  line-height: 1.55;
+  color: var(--maroon);
+  max-width: 64ch;
+}
+:root:not([data-theme='dark']) .lead {
+  color: #4a423d;
+}
+
+/* Section header block: serif title + italic serif caption, generous rhythm. */
+.section-head {
+  margin: 0 0 20px;
+}
+.section-head h2,
+.section-head h3 {
+  margin: 0 0 3px;
 }
 
 a {
@@ -74,12 +164,6 @@ a {
 }
 a:hover {
   text-decoration: underline;
-}
-
-h1, h2, h3 {
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
 }
 
 .container {
@@ -100,20 +184,57 @@ h1, h2, h3 {
   color: var(--muted);
 }
 
+/* Direction pill — glyph + label, anchored on acceleration/deceleration, never good/bad. */
 .pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 3px 10px;
+  padding: 5px 11px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
   background: var(--surface-2);
-  border: 1px solid var(--border);
+  color: var(--ink);
+}
+.pill.easing {
+  background: color-mix(in srgb, var(--green) 16%, var(--surface));
+  color: var(--green);
+}
+.pill.accelerating {
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 button {
   font-family: inherit;
+}
+
+/* Toggle switch — shared by the basket group toggles and the time-series compare switch. */
+.switch {
+  width: 34px;
+  height: 19px;
+  border-radius: 999px;
+  flex: none;
+  position: relative;
+  background: var(--faint);
+  transition: background 0.15s;
+}
+.switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s;
+}
+.switch.on {
+  background: var(--accent);
+}
+.switch.on::after {
+  transform: translateX(15px);
 }
 
 /* Observable Plot dark-mode legibility */

@@ -6,9 +6,9 @@ export const strings = {
   appName: 'Maple CPI',
   tagline: 'Canadian inflation, in plain sight.',
   nav: {
-    home: 'Home',
-    timeseries: 'Explore',
-    basket: 'The basket',
+    home: 'Now',
+    timeseries: 'Time series',
+    basket: 'Basket',
     rates: 'Rates',
     about: 'About',
   },
@@ -19,6 +19,7 @@ export const strings = {
     ema: 'A smoothed trend line that dampens month-to-month noise to show the underlying direction.',
     contribution: "Each group's share of the headline inflation number, weighting its price change by how big a slice of the basket it is.",
     basketWeight: 'How much of a typical household budget goes to each group. Updated by Statistics Canada roughly once a year.',
+    policyRate: "The Bank of Canada's overnight target rate — the main lever it uses to keep inflation near its 2% target. Raising it cools the economy; cutting it stimulates.",
   },
   sources: {
     cpi: { label: 'StatCan Table 18-10-0004', url: 'https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1810000401' },

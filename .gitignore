@@ -32,3 +32,5 @@ seed/out/
 data/raw/
 shiny_bookmarks/
 __pycache__/
+
+.claude

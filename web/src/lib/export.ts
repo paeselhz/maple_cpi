@@ -13,8 +13,15 @@ export function downloadCsv(filename: string, rows: Record<string, unknown>[]): 
 
 /** Serialize an inline Plot SVG (inside `container`) to a PNG download. */
 export async function downloadPng(container: HTMLElement, filename: string, scale = 2): Promise<void> {
-  const svg = container.querySelector('svg');
-  if (!svg) return;
+  // Plot renders a swatch legend as tiny 15×15 SVGs *before* the main chart when a
+  // color scale has `legend: true`, so grabbing the first <svg> exports a solid-colour
+  // swatch. Pick the largest SVG by area — that's always the chart itself.
+  const svgs = [...container.querySelectorAll('svg')];
+  if (!svgs.length) return;
+  const area = (s: SVGSVGElement) =>
+    (s.clientWidth || Number(s.getAttribute('width')) || 0) *
+    (s.clientHeight || Number(s.getAttribute('height')) || 0);
+  const svg = svgs.reduce((a, b) => (area(b) > area(a) ? b : a));
   const clone = svg.cloneNode(true) as SVGSVGElement;
   const bg = getComputedStyle(document.documentElement).getPropertyValue('--surface').trim() || '#fff';
   const w = svg.clientWidth || Number(svg.getAttribute('width')) || 640;
