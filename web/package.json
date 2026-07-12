@@ -1,0 +1,29 @@
+{
+  "name": "@maple-cpi/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "deploy": "vite build && wrangler pages deploy .svelte-kit/cloudflare"
+  },
+  "dependencies": {
+    "@maple-cpi/shared": "*"
+  },
+  "devDependencies": {
+    "@observablehq/plot": "^0.6.16",
+    "@sveltejs/adapter-cloudflare": "^4.8.0",
+    "@sveltejs/kit": "^2.8.0",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@types/d3-geo": "^3.1.0",
+    "d3-geo": "^3.1.1",
+    "svelte": "^5.1.0",
+    "svelte-check": "^4.0.0",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.0",
+    "wrangler": "^3.90.0"
+  }
+}

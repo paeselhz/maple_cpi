@@ -3,19 +3,9 @@
  * (never string interpolation) and DB.batch() for bulk idempotent upserts.
  */
 
-import type { BasketWeightRow, BocRateRow, BondYieldRow, CpiRow } from '@maple-cpi/shared';
+import type { BasketWeightRow, BocRateRow, BondYieldRow, CpiRow, D1Database } from '@maple-cpi/shared';
 
-// Minimal D1 typings (avoid a hard dep on @cloudflare/workers-types at runtime).
-export interface D1PreparedStatement {
-  bind(...values: unknown[]): D1PreparedStatement;
-  run(): Promise<unknown>;
-  all<T = unknown>(): Promise<{ results: T[] }>;
-  first<T = unknown>(col?: string): Promise<T | null>;
-}
-export interface D1Database {
-  prepare(query: string): D1PreparedStatement;
-  batch(statements: D1PreparedStatement[]): Promise<unknown[]>;
-}
+export type { D1Database };
 
 /** Split into chunks so a single batch doesn't exceed D1 limits. */
 function chunk<T>(arr: T[], size: number): T[][] {

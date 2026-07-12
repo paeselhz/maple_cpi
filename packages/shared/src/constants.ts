@@ -60,11 +60,11 @@ export const GROUP_SHORT_LABELS: Record<ProductGroup, string> = {
   'All-items': 'All-items',
   Food: 'Food',
   Shelter: 'Shelter',
-  'Household operations, furnishings and equipment': 'Household ops & furnishings',
+  'Household operations, furnishings and equipment': 'Household & furnishings',
   'Clothing and footwear': 'Clothing & footwear',
   Transportation: 'Transportation',
   'Health and personal care': 'Health & personal care',
-  'Recreation, education and reading': 'Recreation, education & reading',
+  'Recreation, education and reading': 'Recreation & reading',
   'Alcoholic beverages, tobacco products and recreational cannabis': 'Alcohol, tobacco & cannabis',
 };
 
