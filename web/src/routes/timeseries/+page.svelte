@@ -5,6 +5,7 @@
   import GeoMap from '$lib/components/GeoMap.svelte';
   import Explainer from '$lib/components/Explainer.svelte';
   import { plotColors } from '$lib/plot/theme';
+  import { crosshairMarks } from '$lib/plot/crosshair';
   import { theme } from '$lib/theme.svelte';
   import { formatMonthShort, formatPctPlain } from '$lib/format';
   import { shortGroup, windowStart } from '$lib/util';
@@ -92,14 +93,7 @@
           plotRows.filter((r) => r.series.includes('trend')),
           { x: (d) => new Date(d.ref_date), y: 'value', stroke: 'series', strokeWidth: 1.5, strokeDasharray: '3,3' },
         ),
-        Plot.tip(
-          plotRows,
-          Plot.pointerX({
-            x: (d) => new Date(d.ref_date),
-            y: 'value',
-            title: (d: Row) => `${d.series}\n${formatMonthShort(d.ref_date)}: ${d.value.toFixed(2)}%`,
-          }),
-        ),
+        ...crosshairMarks(plotRows, { header: formatMonthShort }),
       ],
     };
   }

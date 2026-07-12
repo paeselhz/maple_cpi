@@ -4,6 +4,7 @@
   import SegmentedControl from '$lib/components/SegmentedControl.svelte';
   import Explainer from '$lib/components/Explainer.svelte';
   import { plotColors } from '$lib/plot/theme';
+  import { crosshairMarks } from '$lib/plot/crosshair';
   import { theme } from '$lib/theme.svelte';
   import { formatMonth, formatPct, formatPctPlain } from '$lib/format';
   import { shortGroup, windowStart } from '$lib/util';
@@ -70,18 +71,30 @@
     };
   }
 
-  // Simulation: custom CPI from selected groups vs headline
+  // Simulation: custom CPI from selected groups vs the FULL basket (all 8 groups).
+  // The baseline is the all-groups reconstruction so selecting everything gives an
+  // exact 0.00 pp delta (it also tracks the published All-items imperceptibly).
   const selectedGroups = $derived(MAJOR_GROUPS.filter((g) => selected[g]));
-  const sim = $derived(customCpi(data.cpi, data.weights, selectedGroups, metric).filter((p) => !from || p.ref_date >= from));
-  const simLatest = $derived(sim.at(-1));
-  const delta = $derived(simLatest ? simLatest.custom - (simLatest.headline ?? 0) : 0);
+  const allSelected = $derived(selectedGroups.length === MAJOR_GROUPS.length);
+  const baseline = $derived(
+    customCpi(data.cpi, data.weights, [...MAJOR_GROUPS], metric).filter((p) => !from || p.ref_date >= from),
+  );
+  const yours = $derived(
+    customCpi(data.cpi, data.weights, selectedGroups, metric).filter((p) => !from || p.ref_date >= from),
+  );
+  const delta = $derived.by(() => {
+    const y = yours.at(-1)?.custom;
+    const b = baseline.at(-1)?.custom;
+    return y != null && b != null ? y - b : 0;
+  });
+
+  const simRows = $derived([
+    ...yours.map((p) => ({ ref_date: p.ref_date, value: p.custom, series: 'Your basket' })),
+    ...baseline.map((p) => ({ ref_date: p.ref_date, value: p.custom, series: 'Official (All-items)' })),
+  ]);
 
   function simSpec(width: number): Plot.PlotOptions {
     const c = plotColors();
-    const rows = [
-      ...sim.map((p) => ({ ref_date: p.ref_date, value: p.custom, series: 'Your basket' })),
-      ...sim.filter((p) => p.headline != null).map((p) => ({ ref_date: p.ref_date, value: p.headline as number, series: 'Official (All-items)' })),
-    ];
     return {
       height: 300,
       x: { type: 'utc', label: null },
@@ -89,8 +102,8 @@
       color: { domain: ['Your basket', 'Official (All-items)'], range: [c.accent, c.muted], legend: true },
       marks: [
         Plot.ruleY([0], { stroke: c.border }),
-        Plot.lineY(rows, { x: (d) => new Date(d.ref_date), y: 'value', stroke: 'series', strokeWidth: 2.2 }),
-        Plot.tip(rows, Plot.pointerX({ x: (d) => new Date(d.ref_date), y: 'value', title: (d) => `${d.series}\n${d.ref_date}: ${d.value.toFixed(2)}%` })),
+        Plot.lineY(simRows, { x: (d) => new Date(d.ref_date), y: 'value', stroke: 'series', strokeWidth: 2.2 }),
+        ...crosshairMarks(simRows, { header: formatMonth }),
       ],
     };
   }

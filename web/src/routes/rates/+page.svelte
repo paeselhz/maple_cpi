@@ -3,8 +3,9 @@
   import Chart from '$lib/plot/Chart.svelte';
   import SegmentedControl from '$lib/components/SegmentedControl.svelte';
   import { plotColors } from '$lib/plot/theme';
+  import { crosshairMarks } from '$lib/plot/crosshair';
   import { theme } from '$lib/theme.svelte';
-  import { formatPctPlain } from '$lib/format';
+  import { formatMonthShort, formatDay, formatPctPlain } from '$lib/format';
   import { windowStart } from '$lib/util';
   import { DATE_WINDOWS } from '$lib/strings';
   import type { PageData } from './$types';
@@ -37,7 +38,7 @@
         Plot.ruleY([2], { stroke: c.muted, strokeDasharray: '2,4' }), // 2% inflation target
         Plot.lineY(rows.filter((r) => r.series === 'Policy rate'), { x: (d) => new Date(d.ref_date), y: 'value', stroke: c.series[0], strokeWidth: 2.2, curve: 'step-after' }),
         Plot.lineY(rows.filter((r) => r.series === 'CPI (YoY)'), { x: (d) => new Date(d.ref_date), y: 'value', stroke: c.series[3], strokeWidth: 2.2 }),
-        Plot.tip(rows, Plot.pointerX({ x: (d) => new Date(d.ref_date), y: 'value', title: (d) => `${d.series}\n${d.ref_date}: ${d.value}%` })),
+        ...crosshairMarks(rows, { header: formatMonthShort, format: (v) => `${v.toFixed(2)}%` }),
       ],
     };
   }
@@ -57,7 +58,7 @@
       color: { domain: ['2-year', '5-year', '10-year'], range: [c.series[0], c.series[1], c.series[2]], legend: true },
       marks: [
         Plot.lineY(rows, { x: (d) => new Date(d.ref_date), y: 'value', stroke: 'series', strokeWidth: 2 }),
-        Plot.tip(rows, Plot.pointerX({ x: (d) => new Date(d.ref_date), y: 'value', title: (d) => `${d.series}\n${d.ref_date}: ${d.value}%` })),
+        ...crosshairMarks(rows, { header: formatDay, format: (v) => `${v.toFixed(2)}%` }),
       ],
     };
   }

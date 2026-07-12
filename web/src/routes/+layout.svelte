@@ -30,12 +30,7 @@
 <header>
   <div class="container bar">
     <a class="brand" href="/">
-      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          fill="var(--accent)"
-          d="M12 2l1.2 3.6 3.3-1.3-1 3.4 3.5.5-2.6 2.4 2.9 2-3.6.4.8 3.5-3-1.9L12 22l-1-3.5-3 1.9.8-3.5-3.6-.4 2.9-2L2.6 12l3.5-.5-1-3.4 3.3 1.3z"
-        />
-      </svg>
+      <span class="leaf" aria-hidden="true"></span>
       <span>{strings.appName}</span>
     </a>
     <nav>
@@ -81,6 +76,14 @@
     font-weight: 800;
     font-size: 18px;
     color: var(--ink);
+  }
+  .leaf {
+    width: 26px;
+    height: 26px;
+    flex: none;
+    background: var(--accent);
+    -webkit-mask: url(/maple-leaf.png) center / contain no-repeat;
+    mask: url(/maple-leaf.png) center / contain no-repeat;
   }
   nav {
     display: flex;
