@@ -1,0 +1,23 @@
+{
+  "name": "maple-cpi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Maple CPI — Canadian CPI + Bank of Canada rates dashboard on Cloudflare (Worker + D1 + SvelteKit)",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "worker",
+    "web"
+  ],
+  "scripts": {
+    "test": "npm run test --workspace @maple-cpi/shared",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "seed:vectors": "tsx seed/resolve-vectors.ts",
+    "seed:backfill": "tsx seed/backfill.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
