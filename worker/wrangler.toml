@@ -1,0 +1,22 @@
+name = "maple-cpi-ingest"
+main = "src/index.ts"
+compatibility_date = "2024-11-27"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 binding — shared with the web app. Fill database_id after `wrangler d1 create maple-cpi`.
+[[d1_databases]]
+binding = "DB"
+database_name = "maple-cpi"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "../migrations"
+
+[triggers]
+# Third week of the month, ~11:00 ET (15:00 UTC), days 18-24 to catch release + revisions.
+# Idempotent handler makes over-scheduling harmless.
+crons = ["0 15 18-24 * *"]
+
+[observability]
+enabled = true
+
+# INGEST_TOKEN is a secret, set with: wrangler secret put INGEST_TOKEN
+# (guards the /__ingest manual-trigger route). Never commit it.
