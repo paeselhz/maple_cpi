@@ -8,10 +8,16 @@
   import { formatMonthShort, formatDay, formatPctPlain } from '$lib/format';
   import { windowStart } from '$lib/util';
   import { DATE_WINDOWS } from '$lib/strings';
+  import ShareButton from '$lib/components/ShareButton.svelte';
+  import { initParams, syncQuery, numParam } from '$lib/urlState';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
-  let windowYears = $state(5);
+  let windowYears = $state(numParam(initParams(), 'win', 5));
+
+  $effect(() => {
+    syncQuery({ win: { value: windowYears, default: 5 } });
+  });
 
   const maxDate = $derived(data.rates.at(-1)?.ref_date ?? data.bonds.at(-1)?.ref_date ?? '');
   const from = $derived(windowStart(maxDate, windowYears));
@@ -93,6 +99,7 @@
     <SegmentedControl
       options={DATE_WINDOWS.map((w) => ({ label: w.label, value: String(w.years) }))}
       value={String(windowYears)} onChange={(v) => (windowYears = Number(v))} ariaLabel="Window" />
+    <ShareButton />
   </div>
 </div>
 
@@ -144,7 +151,7 @@
 <style>
   .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
   .head .page-header { margin-bottom: 24px; }
-  .winctl { padding-top: 44px; flex: none; }
+  .winctl { padding-top: 44px; flex: none; display: flex; align-items: center; gap: 12px; }
   h2 { font-size: clamp(20px, 3vw, 24px); font-weight: 500; }
 
   .tiles { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 20px; margin-bottom: 24px; }

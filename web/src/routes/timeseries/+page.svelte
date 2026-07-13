@@ -11,17 +11,39 @@
   import { shortGroup, windowStart } from '$lib/util';
   import { strings, DATE_WINDOWS } from '$lib/strings';
   import { downloadCsv, downloadPng } from '$lib/export';
+  import ShareButton from '$lib/components/ShareButton.svelte';
+  import { initParams, syncQuery, boolParam, numParam } from '$lib/urlState';
+  import { untrack } from 'svelte';
   import type { MomYoyPoint } from '@maple-cpi/shared';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
 
-  let geo = $state('Canada');
-  let group = $state('All-items');
-  let metric = $state<'yoy' | 'mom'>('yoy');
-  let windowYears = $state(2);
-  let ema = $state(false);
-  let compare = $state(true);
+  // Seed selections from the URL so a shared link opens on the same view.
+  // geo/group drive an API fetch, so only accept values we actually offer.
+  const p = initParams();
+  const geoParam = p.get('geo');
+  const groupParam = p.get('group');
+  let geo = $state(untrack(() => (geoParam && data.avail.geos.includes(geoParam) ? geoParam : 'Canada')));
+  let group = $state(
+    untrack(() => (groupParam && data.avail.groups.includes(groupParam) ? groupParam : 'All-items')),
+  );
+  let metric = $state<'yoy' | 'mom'>(p.get('metric') === 'mom' ? 'mom' : 'yoy');
+  let windowYears = $state(numParam(p, 'win', 2));
+  let ema = $state(boolParam(p, 'ema', false));
+  let compare = $state(boolParam(p, 'cmp', true));
+
+  // Keep the URL in step with the selections (defaults are omitted → tidy links).
+  $effect(() => {
+    syncQuery({
+      geo: { value: geo, default: 'Canada' },
+      group: { value: group, default: 'All-items' },
+      metric: { value: metric, default: 'yoy' },
+      win: { value: windowYears, default: 2 },
+      ema: { value: ema, default: false },
+      cmp: { value: compare, default: true },
+    });
+  });
 
   // series cache: keyed geo|group|ema → points (seeded from the load's initial series)
   let seriesByGeo = $state<Record<string, MomYoyPoint[]>>(
@@ -221,6 +243,7 @@
         {#if loading}<span class="caption load">loading…</span>{/if}
         <button onclick={exportCsv}>CSV</button>
         <button onclick={exportPng}>PNG</button>
+        <ShareButton />
       </div>
     </div>
     {#if insight}<p class="insight">{insight}</p>{/if}
