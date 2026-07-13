@@ -1,12 +1,36 @@
+# Node
+node_modules/
+dist/
+.svelte-kit/
+build/
+*.tsbuildinfo
+
+# Cloudflare / Wrangler
+.wrangler/
+.dev.vars
+.dev.vars.*
+
+# Local D1 / seed artifacts
+seed/out/
+*.sqlite
+*.sqlite3
+
+# Env
+.env
+.env.*
+.Renviron
+
+# OS / editor
+.DS_Store
+.vscode/
+
+# Legacy R runtime artifacts
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
-
-.DS_Store
-
 data/raw/
-
 shiny_bookmarks/
+__pycache__/
 
-.Renviron
+.claude
