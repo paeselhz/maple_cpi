@@ -132,7 +132,7 @@
       </p>
       {#if data.latestRate}
         <div class="rnow tnum">
-          {formatPctPlain(data.latestRate.overnight_target).replace('%', '')}<span class="pct">%</span>
+          {formatPctPlain(data.latestRate.overnight_target, 2).replace('%', '')}<span class="pct">%</span>
         </div>
       {/if}
     </div>

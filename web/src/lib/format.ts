@@ -13,9 +13,9 @@ export function formatPct(v: number | null | undefined, d = 1): string {
   return `${v > 0 ? '+' : ''}${s}%`;
 }
 
-export function formatPctPlain(v: number | null | undefined): string {
+export function formatPctPlain(v: number | null | undefined, d = 1): string {
   if (v === null || v === undefined || Number.isNaN(v)) return '–';
-  return `${pct.format(v)}%`;
+  return `${(d === 2 ? pct2 : pct).format(v)}%`;
 }
 
 export function formatMonth(iso: string): string {

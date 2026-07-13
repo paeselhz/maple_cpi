@@ -99,7 +99,7 @@
 <div class="tiles">
   <div class="tile card">
     <span class="eyebrow">Policy rate</span>
-    <span class="tv tnum">{formatPctPlain(latestRate?.overnight_target).replace('%', '')}<span class="pct">%</span></span>
+    <span class="tv tnum">{formatPctPlain(latestRate?.overnight_target, 2).replace('%', '')}<span class="pct">%</span></span>
     {#if policyMove}
       <span class="note mono" class:cut={policyMove.delta < 0}>
         {policyMove.delta < 0 ? '▼' : '▲'} {policyMove.delta > 0 ? '+' : '−'}{Math.abs(policyMove.delta).toFixed(2)} on {formatDay(policyMove.date)}
@@ -108,7 +108,7 @@
   </div>
   <div class="tile card">
     <span class="eyebrow">Bank rate</span>
-    <span class="tv tnum">{formatPctPlain(latestRate?.bank_rate).replace('%', '')}<span class="pct">%</span></span>
+    <span class="tv tnum">{formatPctPlain(latestRate?.bank_rate, 2).replace('%', '')}<span class="pct">%</span></span>
     <span class="note mono muted">— ceiling of the range</span>
   </div>
   <div class="tile card wide">

@@ -133,6 +133,26 @@
   function exportCsv() {
     downloadCsv(`maple-cpi-${geo}-${group}-${metric}.csv`, plotRows);
   }
+
+  function exportPng() {
+    if (!chartEl) return;
+    const c = plotColors();
+    const names = [...new Set(plotRows.map((r) => r.series))];
+    const legend = names.map((n, i) => ({
+      label: n,
+      color: c.series[i % c.series.length],
+      dash: n.includes('trend'),
+    }));
+    downloadPng(chartEl, `maple-cpi-${geo}-${group}-${metric}.png`, {
+      title: shortGroup(group),
+      subtitle: `${geo}${geo !== 'Canada' && compare ? ' vs Canada' : ''} · ${metric === 'yoy' ? 'year-over-year' : 'month-over-month'}`,
+      caption: insight,
+      legend,
+      axisLabel: `↑ ${metric.toUpperCase()} %`,
+      note: nowPt ? `now: ${formatPctPlain(val(nowPt))} (${formatMonth(nowPt.ref_date)})` : undefined,
+      source: 'Maple CPI · Source: Statistics Canada',
+    });
+  }
 </script>
 
 <svelte:head><title>Time series — Maple CPI</title></svelte:head>
@@ -200,7 +220,7 @@
       <div class="exports">
         {#if loading}<span class="caption load">loading…</span>{/if}
         <button onclick={exportCsv}>CSV</button>
-        <button onclick={() => chartEl && downloadPng(chartEl, `maple-cpi-${geo}-${group}.png`)}>PNG</button>
+        <button onclick={exportPng}>PNG</button>
       </div>
     </div>
     {#if insight}<p class="insight">{insight}</p>{/if}
