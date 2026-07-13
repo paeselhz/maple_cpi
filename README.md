@@ -1,12 +1,40 @@
 # 🍁 Maple CPI
 
-Canadian inflation, in plain sight. A public, self-updating dashboard for the
+**Canadian inflation, in plain sight.** A public, self-updating dashboard for the
 Consumer Price Index and Bank of Canada rates — legible to someone worried about
 their bills in ~3 seconds, and a real tool for someone who wants to dig.
 
-This is a full rebuild of the original R/Shiny app onto a free, low-maintenance
-**Cloudflare** stack: a cron **Worker** pulls data into **D1**, and a **SvelteKit**
-front end (Observable Plot) serves it. The old app is preserved under [`legacy/`](legacy/).
+## Why
+
+Inflation shapes rent, groceries, and the interest on every loan — yet the actual
+numbers live in dense Statistics Canada tables that most people never open. When the
+headline rate makes the news, the follow-up questions go unanswered: *Is it easing or
+getting worse? Which part of my life is driving it — food, shelter, gas? Is my province
+different from the national figure? And what is the Bank of Canada doing about it?*
+
+Maple CPI turns the official data into a page you can read at a glance and then
+interrogate. It stays current on its own, costs nothing to run, and every view is a
+link you can share.
+
+## What you can do
+
+- **See the headline at a glance** — the latest all-items CPI, whether the pace is
+  easing or accelerating, and how it sits against the Bank of Canada's 2% target.
+- **See who's driving it** — each spending group's contribution to the headline number,
+  ranked, so "inflation is 3%" becomes "food and shelter are doing most of the work."
+- **Explore the time series** — any group, nationally or by province, year-over-year or
+  month-over-month, with an optional trend line and a compare-to-Canada overlay.
+- **Follow the policy response** — the overnight rate against inflation, plus 2/5/10-year
+  Government of Canada bond yields.
+- **Take it with you** — every selection is encoded in the URL (**Share** button), and
+  any chart exports to **CSV** or a captioned **PNG**.
+
+## How it's built
+
+A full rebuild of the original R/Shiny app onto a free, low-maintenance **Cloudflare**
+stack: a monthly cron **Worker** pulls fresh data into **D1**, and a **SvelteKit** front
+end (Observable Plot) serves it. No servers to babysit, no paid tier. The old app is
+preserved under [`legacy/`](legacy/).
 
 | Layer | Stack |
 |-------|-------|
